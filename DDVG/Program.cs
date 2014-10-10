@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using TheGame.States;
+
 using SFML.Graphics;
 using SFML.Window;
 
-namespace DDVG {
+namespace TheGame {
 	class Program {
 		static void Main(string[] args) {
+			Console.Title = "The Game Console";
+			
 			Renderer R = new Renderer(800, 600);
 			Stopwatch SWatch = new Stopwatch();
 			SWatch.Start();
+
+			R.SwitchState(new MenuState());
 
 			while (R.IsOpen()) {
 				R.DispatchEvents();

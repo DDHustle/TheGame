@@ -6,37 +6,38 @@ using System.Threading.Tasks;
 
 using SFML.Graphics;
 using SFML.Window;
+using TheGame.States;
 
-namespace DDVG {
+namespace TheGame {
 	class Renderer : RenderWindow {
-		List<Sprite> Sprites;
+		public State ActiveState;
 
 		public Renderer(int W, int H)
 			: base(new VideoMode((uint)W, (uint)H), "The Game", Styles.Close) {
-			Closed += (S, E) => Close();
 
-			Sprites = new List<Sprite>();
-			Random Rand = new Random();
+			Closed += (S, E) => {
+				ActiveState.Dispose();
+				Close();
+			};
 
-			for (int i = 0; i < 4; i++) {
-				Sprite S = new Sprite(new Texture("data/textures/car.png"));
-				S.Position = new Vector2f((float)W / 4 * i, (float)H / 5);
-				S.Scale = new Vector2f(0.65f, 0.65f);
-				S.Color = new Color((byte)Rand.Next(0, 255), (byte)Rand.Next(0, 255), (byte)Rand.Next(0, 255));
+			TextEntered += (S, E) => ActiveState.TextEntered(E.Unicode);
+			KeyPressed += (S, E) => ActiveState.Key(E, true);
+			KeyReleased += (S, E) => ActiveState.Key(E, false);
+		}
 
-				Sprites.Add(S);
-			}
+		public void SwitchState(State NewState) {
+			if (ActiveState != null)
+				ActiveState.SwitchTo(NewState);
+			NewState.SwitchTo(ActiveState);
+			ActiveState = NewState;
 		}
 
 		public void Update(float T) {
-
+			ActiveState.Update(T);
 		}
 
 		public void Render() {
-			Clear(Color.Black);
-			for (int i = 0; i < Sprites.Count; i++)
-				Draw(Sprites[i]);
-
+			ActiveState.Render(this);
 			Display();
 		}
 	}
