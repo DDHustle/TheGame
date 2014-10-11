@@ -22,3 +22,15 @@ E:\Projects\TheGame\bin\TheGame.exe
 E:\Projects\TheGame\bin\TheGame.pdb
 E:\Projects\TheGame\DDVG\obj\Debug\TheGame.exe
 E:\Projects\TheGame\DDVG\obj\Debug\TheGame.pdb
+C:\Users\Cody\Documents\GitHub\TheGame\bin\TheGame.exe.config
+C:\Users\Cody\Documents\GitHub\TheGame\DDVG\obj\Debug\TheGame.exe
+C:\Users\Cody\Documents\GitHub\TheGame\DDVG\obj\Debug\TheGame.pdb
+C:\Users\Cody\Documents\GitHub\TheGame\bin\csfml-audio-2.dll
+C:\Users\Cody\Documents\GitHub\TheGame\bin\csfml-graphics-2.dll
+C:\Users\Cody\Documents\GitHub\TheGame\bin\csfml-window-2.dll
+C:\Users\Cody\Documents\GitHub\TheGame\bin\data\textures\car.png
+C:\Users\Cody\Documents\GitHub\TheGame\bin\libsndfile-1.dll
+C:\Users\Cody\Documents\GitHub\TheGame\bin\openal32.dll
+C:\Users\Cody\Documents\GitHub\TheGame\bin\TheGame.exe
+C:\Users\Cody\Documents\GitHub\TheGame\bin\TheGame.pdb
+C:\Users\Cody\Documents\GitHub\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssemblyReference.cache

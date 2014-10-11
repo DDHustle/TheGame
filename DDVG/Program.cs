@@ -17,13 +17,18 @@ namespace TheGame {
 			SWatch.Start();
 
 			R.SwitchState(new MenuState());
-
+            
 			while (R.IsOpen()) {
 				R.DispatchEvents();
 				R.Update((float)SWatch.ElapsedMilliseconds / 1000);
 				R.Render();
 				SWatch.Restart();
 			}
+            Console.WriteLine("Quitting...");
 		}
+        static void KeyPressed(char c, bool down)
+        {
+            Console.WriteLine(c.ToString());
+        }
 	}
 }

@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="data\fonts\framd.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="csfml-audio-2.dll">
