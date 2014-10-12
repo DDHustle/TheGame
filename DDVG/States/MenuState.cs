@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 using SFML;
 using SFML.Window;
 using SFML.Graphics;
+using SFML.Audio;
 
 namespace TheGame.States {
 	class MenuState : State {
         Font f;
+        Music soundTrack;
         bool fontLoaded;
-        
+        bool soundtrackLoaded;
+        RectangleShape startBounds = new RectangleShape();
+
         public override void Render(Renderer R)
         {
             R.Clear(Color.White);
@@ -29,7 +33,20 @@ namespace TheGame.States {
             {
                 Console.WriteLine("Could not find font file...");
             }
-             
+
+
+            if (File.Exists(Directory.GetCurrentDirectory() + "/data/sounds/soundtrack.ogg") && soundtrackLoaded != true)
+            {
+                Console.WriteLine("Soundtrack found");
+                soundTrack = new Music(Directory.GetCurrentDirectory() + "/data/sounds/soundtrack.ogg");
+                soundTrack.Play();
+                soundTrack.Loop = true;
+                soundtrackLoaded = true;
+            }
+            else if (soundtrackLoaded != true)
+            {
+                Console.WriteLine("Could not find soundtrack file...");
+            }
 
             Text start = new Text();
             start.Font = f;
@@ -38,7 +55,11 @@ namespace TheGame.States {
             start.DisplayedString = "Start";
             start.Color = Color.Black;
             start.Position = new Vector2f(375f, 200f);
+            startBounds.Position = start.Position;
+            startBounds.Size = new Vector2f(50f, 20f);
+            
             R.Draw(start);
+            //R.Draw(startBounds);
 
             Text options = new Text();
             options.Font = f;
