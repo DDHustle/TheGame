@@ -10,30 +10,30 @@ using SFML.Window;
 using SFML.Graphics;
 using SFML.Audio;
 
+using TheGame.GUI;
+
 namespace TheGame.States {
 	class MenuState : State {
         Font f;
         Music soundTrack;
         bool fontLoaded;
         bool soundtrackLoaded;
-        RectangleShape startBounds = new RectangleShape();
+        Button StartButton;
+        Button OptionsButton;
+        Button QuitButton;
 
-        public override void Render(Renderer R)
+        public MenuState(Renderer R)
         {
-            R.Clear(Color.White);
-            
-            
             if (File.Exists(Directory.GetCurrentDirectory() + "/data/fonts/framd.ttf") && fontLoaded != true)
             {
                 Console.WriteLine("Font found, loading...");
                 f = new Font(Directory.GetCurrentDirectory() + "/data/fonts/framd.ttf");
                 fontLoaded = true;
             }
-            else if(fontLoaded != true)
+            else if (fontLoaded != true)
             {
                 Console.WriteLine("Could not find font file...");
             }
-
 
             if (File.Exists(Directory.GetCurrentDirectory() + "/data/sounds/soundtrack.ogg") && soundtrackLoaded != true)
             {
@@ -48,36 +48,30 @@ namespace TheGame.States {
                 Console.WriteLine("Could not find soundtrack file...");
             }
 
-            Text start = new Text();
-            start.Font = f;
-            start.Style = Text.Styles.Bold;
-            start.CharacterSize = 30;
-            start.DisplayedString = "Start";
-            start.Color = Color.Black;
-            start.Position = new Vector2f(375f, 200f);
-            startBounds.Position = start.Position;
-            startBounds.Size = new Vector2f(50f, 20f);
+            StartButton = new Button(R, new Vector2f(375f, 200f), new Vector2f(95f, 50f), "Start", f);
+            StartButton.MouseEnter += (S, E) => MouseEnterStartBtn(S, E);
+            OptionsButton = new Button(R, new Vector2f(365f, 300f), new Vector2f(120f, 50f), "Options", f);
+            QuitButton = new Button(R, new Vector2f(385f, 400f), new Vector2f(85f, 50f), "Quit", f);
+
+            R.MouseMoved += (S, E) => MouseMoved(E);
+        }
+
+        public override void Render(Renderer R)
+        {
+            R.Clear(Color.White);
+            StartButton.Render(R);
+            OptionsButton.Render(R);
+            QuitButton.Render(R);
+        }
+
+        private void MouseEnterStartBtn(object sender, MouseMoveEventArgs e)
+        {
+
+        }
+
+        private void MouseMoved(MouseMoveEventArgs e)
+        {
             
-            R.Draw(start);
-            //R.Draw(startBounds);
-
-            Text options = new Text();
-            options.Font = f;
-            options.Style = Text.Styles.Bold;
-            options.CharacterSize = 30;
-            options.DisplayedString = "Options";
-            options.Color = Color.Black;
-            options.Position = new Vector2f(360f, 300f);
-            R.Draw(options);
-
-            Text quit = new Text();
-            quit.Font = f;
-            quit.Style = Text.Styles.Bold;
-            quit.CharacterSize = 30;
-            quit.DisplayedString = "Quit";
-            quit.Color = Color.Black;
-            quit.Position = new Vector2f(380f, 400f);
-            R.Draw(quit);
         }
 
 	}

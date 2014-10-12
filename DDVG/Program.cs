@@ -16,7 +16,7 @@ namespace TheGame {
 			Stopwatch SWatch = new Stopwatch();
 			SWatch.Start();
 
-			R.SwitchState(new MenuState());
+			R.SwitchState(new MenuState(R));
             
 			while (R.IsOpen()) {
 				R.DispatchEvents();

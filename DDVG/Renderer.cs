@@ -14,7 +14,7 @@ namespace TheGame {
 
 		public Renderer(int W, int H)
 			: base(new VideoMode((uint)W, (uint)H), "The Game", Styles.Close) {
-
+            
 			Closed += (S, E) => Close();
 			TextEntered += (S, E) => ActiveState.TextEntered(E.Unicode);
 			KeyPressed += (S, E) => ActiveState.Key(E, true);
