@@ -20,7 +20,7 @@ namespace TheGame {
             
 			while (R.IsOpen()) {
 				R.DispatchEvents();
-				R.Update((float)SWatch.ElapsedMilliseconds / 1000);
+				R.Update((float)SWatch.ElapsedMilliseconds / 1000f);
 				R.Render();
 				SWatch.Restart();
 			}

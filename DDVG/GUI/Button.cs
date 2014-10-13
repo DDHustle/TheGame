@@ -13,14 +13,19 @@ namespace TheGame.GUI
     {
         Vector2f Position;
         Vector2f Size;
-        String TextStr;
-        RectangleShape rect;
+        public String TextStr;
+        public RectangleShape rect;
         Text TextObj;
         Font FontObj;
         Renderer Parent;
         public event EventHandler MouseEnter;
         public event EventHandler MouseLeave;
-        EventHandler EventHandler;
+        public event EventHandler MouseRelease;
+
+        //stupid public vars
+        public bool increasingInSize;
+        public bool soundEffectPlayed;
+        
 
         public Button(Renderer R, Vector2f pos, Vector2f size, String text, Font f, float TextOffsetX = 0, float TextOffsetY = 0)
         {
@@ -46,19 +51,29 @@ namespace TheGame.GUI
             rect.OutlineThickness = 4;
 
             R.MouseMoved += (S, E) => HandleMouseMove(E);
+            R.MouseButtonReleased += HandleMouseRelease;
+            MouseEnter = new EventHandler(MouseEnterHandler);
+            MouseLeave = new EventHandler(MouseLeaveHandler);
+            MouseRelease = new EventHandler(MouseReleaseHandler);
+        }
+
+        private void HandleMouseRelease(object sender, MouseButtonEventArgs e)
+        {
+            if (e.X >= Position.X && e.X <= Position.X + Size.X && e.Y >= Position.Y && e.Y <= Position.Y + Size.Y)
+            {
+                MouseRelease(this, e);
+            }
         }
 
         private void HandleMouseMove(MouseMoveEventArgs e)
         {
             if (e.X >= Position.X && e.X <= Position.X + Size.X && e.Y >= Position.Y && e.Y <= Position.Y + Size.Y)
             {
-                EventHandler = MouseEnter;
-                EventHandler(this, e);
+                MouseEnter(this, e);
             }
             else
             {
-                EventHandler = MouseLeave;
-                EventHandler(this, e);
+                MouseLeave(this, e);
             }
         }
         
@@ -66,20 +81,21 @@ namespace TheGame.GUI
         {
         }
 
-        public virtual void MouseEnterHandler(MouseMoveEventArgs e)
+        public virtual void MouseEnterHandler(Object sender, EventArgs e)
         {
             
         }
 
-        public virtual void MouseLeaveHandler(MouseMoveEventArgs e)
+        public virtual void MouseLeaveHandler(Object sender, EventArgs e)
         {
            
         }
 
-        public virtual void MouseClick(MouseMoveEventArgs e)
+        public virtual void MouseReleaseHandler(Object sender, EventArgs e)
         {
-            
+
         }
+
 
         public virtual void Update(float T)
         {

@@ -9,6 +9,7 @@ using SFML.Window;
 
 namespace TheGame.States {
 	class State : IDisposable {
+
 		public State() {
 		}
 
