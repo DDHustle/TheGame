@@ -6,106 +6,76 @@ using System.Threading.Tasks;
 
 using SFML.Graphics;
 using SFML.Window;
+using SFML.Audio;
 
-namespace TheGame.GUI
-{
-    class Button : IDisposable
-    {
-        Vector2f Position;
-        Vector2f Size;
-        public String TextStr;
-        public RectangleShape rect;
-        Text TextObj;
-        Font FontObj;
-        Renderer Parent;
-        public event EventHandler MouseEnter;
-        public event EventHandler MouseLeave;
-        public event EventHandler MouseRelease;
+namespace TheGame.GUI {
+	class Button : UIElement {
+		public String ButtonText;
+		public RectangleShape Rect;
 
-        //stupid public vars
-        public bool increasingInSize;
-        public bool soundEffectPlayed;
-        
+		internal Text TextObj;
+		internal Font FontObj;
+		internal Sound Tick;
 
-        public Button(Renderer R, Vector2f pos, Vector2f size, String text, Font f, float TextOffsetX = 0, float TextOffsetY = 0)
-        {
-            //pos will determine where the rectangle starts, text will be offset
-            Position = pos;
-            Size = size;
-            TextStr = text;
-            Parent = R;
-            FontObj = f;
+		public float TextOffsetX, TextOffsetY;
 
-            TextObj = new Text();
-            TextObj.Font = f;
-            TextObj.Style = Text.Styles.Bold;
-            TextObj.CharacterSize = 30;
-            TextObj.DisplayedString = TextStr;
-            TextObj.Color = Color.Black;
-            TextObj.Position = new Vector2f(pos.X + 10 + TextOffsetX, pos.Y + 5 + TextOffsetY);
+		public override Vector2f Position {
+			get {
+				return base.Position;
+			}
+			set {
+				base.Position = value;
+				Vector2f Bounds = FontMgr.GetSize(TextObj) / 2;
+				TextObj.Position = Position + new Vector2f(TextOffsetX, TextOffsetY) - Bounds + Size / 2;
+				Rect.Position = Position;
+			}
+		}
 
-            rect = new RectangleShape();
-            rect.Position = pos;
-            rect.Size = size;
-            rect.OutlineColor = Color.Black;
-            rect.OutlineThickness = 4;
+		public override Vector2f Size {
+			get {
+				return base.Size;
+			}
+			set {
+				base.Size = value;
+				Rect.Size = Size;
+				Position = Position;
+			}
+		}
 
-            R.MouseMoved += (S, E) => HandleMouseMove(E);
-            R.MouseButtonReleased += HandleMouseRelease;
-            MouseEnter = new EventHandler(MouseEnterHandler);
-            MouseLeave = new EventHandler(MouseLeaveHandler);
-            MouseRelease = new EventHandler(MouseReleaseHandler);
-        }
+		public Button(GUIBase UI, String Txt, Font F, float TextOffsetX = 0, float TextOffsetY = -10)
+			: base(UI) {
+			ButtonText = Txt;
+			FontObj = F;
 
-        private void HandleMouseRelease(object sender, MouseButtonEventArgs e)
-        {
-            if (e.X >= Position.X && e.X <= Position.X + Size.X && e.Y >= Position.Y && e.Y <= Position.Y + Size.Y)
-            {
-                MouseRelease(this, e);
-            }
-        }
+			UI.AddElement(this);
 
-        private void HandleMouseMove(MouseMoveEventArgs e)
-        {
-            if (e.X >= Position.X && e.X <= Position.X + Size.X && e.Y >= Position.Y && e.Y <= Position.Y + Size.Y)
-            {
-                MouseEnter(this, e);
-            }
-            else
-            {
-                MouseLeave(this, e);
-            }
-        }
-        
-        public virtual void Dispose()
-        {
-        }
+			this.TextOffsetX = TextOffsetX;
+			this.TextOffsetY = TextOffsetY;
 
-        public virtual void MouseEnterHandler(Object sender, EventArgs e)
-        {
-            
-        }
+			TextObj = new Text();
+			TextObj.Font = F;
+			TextObj.Style = Text.Styles.Bold;
+			TextObj.CharacterSize = 30;
+			TextObj.DisplayedString = ButtonText;
+			TextObj.Color = Color.Black;
 
-        public virtual void MouseLeaveHandler(Object sender, EventArgs e)
-        {
-           
-        }
+			Rect = new RectangleShape();
+			Rect.OutlineColor = Color.Black;
+			Rect.OutlineThickness = 4;
 
-        public virtual void MouseReleaseHandler(Object sender, EventArgs e)
-        {
+			Tick = AudioMgr.GetSound("tick.wav");
+		}
 
-        }
+		public override void OnMouseClick(Mouse.Button B, int X, int Y, bool Down) {
+			if (!Down)
+				AudioMgr.PlayOnce(Tick);
+			base.OnMouseClick(B, X, Y, Down);
+		}
 
-
-        public virtual void Update(float T)
-        {
-
-        }
-
-        public virtual void Render(Renderer R)
-        {
-            R.Draw(rect);
-            R.Draw(TextObj);
-        }
-    }
+		public override void Render(Renderer R) {
+			R.Draw(Rect);
+			R.Draw(TextObj);
+			base.Render(R);
+		}
+	}
 }

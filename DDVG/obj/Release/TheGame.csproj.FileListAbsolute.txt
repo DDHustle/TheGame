@@ -1,0 +1,11 @@
+E:\Projects\TheGame\bin\TheGame.exe.config
+E:\Projects\TheGame\bin\csfml-audio-2.dll
+E:\Projects\TheGame\bin\csfml-graphics-2.dll
+E:\Projects\TheGame\bin\csfml-window-2.dll
+E:\Projects\TheGame\bin\data\textures\car.png
+E:\Projects\TheGame\bin\libsndfile-1.dll
+E:\Projects\TheGame\bin\openal32.dll
+E:\Projects\TheGame\bin\TheGame.exe
+E:\Projects\TheGame\bin\TheGame.pdb
+E:\Projects\TheGame\DDVG\obj\Release\TheGame.exe
+E:\Projects\TheGame\DDVG\obj\Release\TheGame.pdb

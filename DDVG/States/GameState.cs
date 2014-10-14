@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace TheGame.States {
 	class GameState : State {
+		public GameState(Renderer R)
+			: base(R) {
+		}
 	}
 }

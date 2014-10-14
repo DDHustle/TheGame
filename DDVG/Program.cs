@@ -11,24 +11,22 @@ namespace TheGame {
 	class Program {
 		static void Main(string[] args) {
 			Console.Title = "The Game Console";
-			
+
 			Renderer R = new Renderer(800, 600);
 			Stopwatch SWatch = new Stopwatch();
 			SWatch.Start();
 
 			R.SwitchState(new MenuState(R));
-            
+
 			while (R.IsOpen()) {
 				R.DispatchEvents();
 				R.Update((float)SWatch.ElapsedMilliseconds / 1000f);
 				R.Render();
 				SWatch.Restart();
 			}
-            Console.WriteLine("Quitting...");
+
+			Terminal.PrintLn("Quitting...");
+			Environment.Exit(0); // Required
 		}
-        static void KeyPressed(char c, bool down)
-        {
-            Console.WriteLine(c.ToString());
-        }
 	}
 }

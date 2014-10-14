@@ -3,37 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheGame.GUI;
 
 using SFML.Graphics;
 using SFML.Window;
 
 namespace TheGame.States {
-	class State : IDisposable {
+	class State {
+		internal Renderer RendererBase;
+		internal GUIBase UI;
 
-		public State() {
+		public State(Renderer R) {
+			RendererBase = R;
+			UI = new GUIBase(R);
+		}
+		
+		public virtual void Deactivate(State NewState) {
 		}
 
-		public virtual void Dispose() {
-		}
-
-		// Called on old state when switching to new state To
-		public virtual void SwitchTo(State To) {
-		}
-
-		// Called on new state when switching from old state From
-		public virtual void SwitchFrom(State From) {
+		public virtual void Activate(State OldState) {
 		}
 
 		public virtual void TextEntered(string S) {
 		}
 
-		public virtual void Key(KeyEventArgs K, bool Down = true) {
+		public virtual void Key(KeyEventArgs K, bool Down) {
+		}
+
+		public virtual void MouseMove(MouseMoveEventArgs E) {
+			UI.OnMouseMove(E.X, E.Y, true);
+		}
+
+		public virtual void MouseClick(MouseButtonEventArgs E, bool Down) {
+			UI.OnMouseClick(E.Button, E.X, E.Y, Down);
 		}
 
 		public virtual void Update(float T) {
+			UI.Update(T);
 		}
 
 		public virtual void Render(Renderer R) {
+			UI.Render(R);
 		}
 	}
 }

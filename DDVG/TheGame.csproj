@@ -54,12 +54,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\Button.cs" />
+    <Compile Include="GUI\ButtonOutlined.cs" />
+    <Compile Include="GUI\GUIBase.cs" />
+    <Compile Include="GUI\UIElement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
+    <Compile Include="Utils\FontMgr.cs" />
+    <Compile Include="Utils\AudioMgr.cs" />
+    <Compile Include="Utils\Terminal.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
