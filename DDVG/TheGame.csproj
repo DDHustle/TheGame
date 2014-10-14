@@ -69,8 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="data\fonts\framd.ttf" />
-    <None Include="data\sounds\soundtrack.ogg" />
+    <None Include="data\fonts\framd.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="data\sounds\soundtrack.ogg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="csfml-audio-2.dll">
@@ -82,8 +86,12 @@
     <Content Include="csfml-window-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\sounds\soundtrack.mp3" />
-    <Content Include="data\sounds\tick.wav" />
+    <Content Include="data\sounds\soundtrack.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\sounds\tick.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data\textures\car.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

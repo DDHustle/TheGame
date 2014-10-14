@@ -33,3 +33,7 @@ C:\Users\Cody\Documents\GitHub\TheGame\bin\openal32.dll
 C:\Users\Cody\Documents\GitHub\TheGame\bin\TheGame.exe
 C:\Users\Cody\Documents\GitHub\TheGame\bin\TheGame.pdb
 C:\Users\Cody\Documents\GitHub\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssemblyReference.cache
+E:\Projects\TheGame\bin\data\sounds\soundtrack.mp3
+E:\Projects\TheGame\bin\data\sounds\tick.wav
+E:\Projects\TheGame\bin\data\fonts\framd.ttf
+E:\Projects\TheGame\bin\data\sounds\soundtrack.ogg
