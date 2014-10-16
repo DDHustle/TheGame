@@ -37,3 +37,4 @@ E:\Projects\TheGame\bin\data\sounds\soundtrack.mp3
 E:\Projects\TheGame\bin\data\sounds\tick.wav
 E:\Projects\TheGame\bin\data\fonts\framd.ttf
 E:\Projects\TheGame\bin\data\sounds\soundtrack.ogg
+E:\Projects\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssemblyReference.cache

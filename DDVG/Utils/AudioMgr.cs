@@ -11,12 +11,44 @@ using SFML.Audio;
 
 namespace TheGame {
 	static class AudioMgr {
+		enum MusicOp {
+			FadeOut
+		}
+
 		static Dictionary<string, Music> Musics; // Intentional
 		static Dictionary<string, Sound> Sounds;
+
+		static List<Tuple<MusicOp, float, Music>> OpList;
+		static List<Tuple<MusicOp, float, Music>> OpQueue;
 
 		static AudioMgr() {
 			Musics = new Dictionary<string, Music>();
 			Sounds = new Dictionary<string, Sound>();
+
+			OpList = new List<Tuple<MusicOp, float, Music>>();
+			OpQueue = new List<Tuple<MusicOp, float, Music>>();
+		}
+
+
+		public static void Update(float T) {
+			if (OpList.Count > 0) {
+				foreach (var O in OpList) {
+					if (O.Item1 == MusicOp.FadeOut) {
+						if (O.Item3.Volume <= 1) {
+							O.Item3.Loop = false;
+							O.Item3.Stop();
+							OpQueue.Add(O);
+						} else
+							O.Item3.Volume -= O.Item2 * T;
+					}
+				}
+
+				if (OpQueue.Count > 0) {
+					foreach (var Q in OpQueue)
+						OpList.Remove(Q);
+					OpQueue.Clear();
+				}
+			}
 		}
 
 		public static Music GetMusic(string Name) {
@@ -35,13 +67,6 @@ namespace TheGame {
 			return GetSound(Name);
 		}
 
-		public static void PlayOnce(Sound S) {
-			if (S.Status != SoundStatus.Stopped)
-				S.Stop();
-			S.Loop = false;
-			S.Play();
-		}
-
 		public static void UnloadMusic() {
 			foreach (var M in Musics)
 				M.Value.Dispose();
@@ -52,6 +77,17 @@ namespace TheGame {
 			foreach (var S in Sounds)
 				S.Value.Dispose();
 			Sounds = new Dictionary<string, Sound>();
+		}
+
+		public static void PlayOnce(Sound S) {
+			if (S.Status != SoundStatus.Stopped)
+				S.Stop();
+			S.Loop = false;
+			S.Play();
+		}
+
+		public static void FadeOut(Music M, float Amount) {
+			OpList.Add(new Tuple<MusicOp, float, Music>(MusicOp.FadeOut, Amount, M));
 		}
 	}
 }

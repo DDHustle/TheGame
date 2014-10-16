@@ -36,6 +36,7 @@ namespace TheGame {
 		}
 
 		public void Update(float T) {
+			AudioMgr.Update(T);
 			ActiveState.Update(T);
 		}
 
