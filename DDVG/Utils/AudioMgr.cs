@@ -11,8 +11,9 @@ using SFML.Audio;
 
 namespace TheGame {
 	static class AudioMgr {
-		enum MusicOp {
-			FadeOut
+		public enum MusicOp {
+			FadeOut,
+			FadeIn,
 		}
 
 		static Dictionary<string, Music> Musics; // Intentional
@@ -40,6 +41,14 @@ namespace TheGame {
 							OpQueue.Add(O);
 						} else
 							O.Item3.Volume -= O.Item2 * T;
+					} else if (O.Item1 == MusicOp.FadeIn) {
+						if (O.Item3.Volume >= 100)
+							OpQueue.Add(O);
+						else {
+							if (O.Item3.Status != SoundStatus.Playing)
+								O.Item3.Play();
+							O.Item3.Volume += O.Item2 * T;
+						}
 					}
 				}
 
@@ -86,8 +95,10 @@ namespace TheGame {
 			S.Play();
 		}
 
-		public static void FadeOut(Music M, float Amount) {
-			OpList.Add(new Tuple<MusicOp, float, Music>(MusicOp.FadeOut, Amount, M));
+		public static void DoOperation(MusicOp O, Music M, float Amount) {
+			if (O == MusicOp.FadeIn)
+				M.Volume = 1;
+			OpList.Add(new Tuple<MusicOp, float, Music>(O, Amount, M));
 		}
 	}
 }

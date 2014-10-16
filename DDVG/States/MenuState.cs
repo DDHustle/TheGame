@@ -47,16 +47,13 @@ namespace TheGame.States {
 		}
 
 		public override void Deactivate(State NewState) {
-			/*SoundTrack.Loop = false;
-			SoundTrack.Stop();*/
-
-			AudioMgr.FadeOut(SoundTrack, 1000);
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 1000);
 			base.Deactivate(NewState);
 		}
 
 		public override void Activate(State OldState) {
 			SoundTrack.Loop = true;
-			SoundTrack.Play();
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeIn, SoundTrack, 100);
 			base.Activate(OldState);
 		}
 
