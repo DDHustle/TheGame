@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Dynamic;
 
 namespace TheGame {
 	// Use this instead of the Console class, console crashes if the program runs as 
@@ -27,13 +28,6 @@ namespace TheGame {
 			if (O != null && Args != null)
 				O = string.Format(O.ToString(), Args);
 			Console.Write(O ?? "NULL");
-		}
-
-		public delegate PrintDel PrintDel(object O);
-
-		public static PrintDel Prnt(object O) {
-			Print(O);
-			return new PrintDel(Prnt);
 		}
 	}
 }
