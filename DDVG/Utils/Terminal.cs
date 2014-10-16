@@ -28,5 +28,12 @@ namespace TheGame {
 				O = string.Format(O.ToString(), Args);
 			Console.Write(O ?? "NULL");
 		}
+
+		public delegate PrintDel PrintDel(object O);
+
+		public static PrintDel Prnt(object O) {
+			Print(O);
+			return new PrintDel(Prnt);
+		}
 	}
 }
