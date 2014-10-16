@@ -47,7 +47,7 @@ namespace TheGame.States {
 		}
 
 		public override void Deactivate(State NewState) {
-			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 1000);
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 100);
 			base.Deactivate(NewState);
 		}
 
