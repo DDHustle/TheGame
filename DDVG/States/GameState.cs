@@ -25,6 +25,8 @@ namespace TheGame.States {
 			ClearColor = new Color(12, 12, 12);
 
 			Ents = new List<Entity>();
+
+			AddEntity(new World());
 		}
 
 		public void AddEntity(Entity E) {

@@ -38,3 +38,7 @@ E:\Projects\TheGame\bin\data\sounds\tick.wav
 E:\Projects\TheGame\bin\data\fonts\framd.ttf
 E:\Projects\TheGame\bin\data\sounds\soundtrack.ogg
 E:\Projects\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssemblyReference.cache
+E:\Projects\TheGame\bin\data\textures\tiles\a.png
+E:\Projects\TheGame\bin\data\textures\tiles\b.png
+E:\Projects\TheGame\bin\data\textures\tiles\alpha.png
+E:\Projects\TheGame\bin\data\textures\tiles\c.png
