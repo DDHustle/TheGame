@@ -69,6 +69,7 @@
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
+    <Compile Include="Utils\Error.cs" />
     <Compile Include="Utils\FontMgr.cs" />
     <Compile Include="Utils\AudioMgr.cs" />
     <Compile Include="Utils\Terminal.cs" />
