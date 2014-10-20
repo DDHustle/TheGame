@@ -20,24 +20,54 @@ namespace TheGame.States {
 
 		List<Entity> Ents;
 
+		bool W, A, S, D;
+		World Wrld;
+
 		public GameState(Renderer R)
 			: base(R) {
 			ClearColor = new Color(12, 12, 12);
 
 			Ents = new List<Entity>();
 
-			AddEntity(new World());
+			Wrld = AddEntity(new World());
 		}
 
-		public void AddEntity(Entity E) {
+		public T AddEntity<T>(T E) where T : Entity {
 			Ents.Add(E);
+			return E;
 		}
 
 		public void RemoveEntity(Entity E) {
 			Ents.Remove(E);
 		}
 
+		public override void Key(KeyEventArgs K, bool Down) {
+			if (K.Code == Keyboard.Key.W) // TODO: Strip off, better input system
+				W = Down;
+			if (K.Code == Keyboard.Key.S)
+				S = Down;
+			if (K.Code == Keyboard.Key.A)
+				A = Down;
+			if (K.Code == Keyboard.Key.D)
+				D = Down;
+		}
+
 		public override void Update(float T) {
+			float SpeedX = 0;
+			float SpeedY = 0;
+			float Speed = 200;
+
+			if (W)
+				SpeedY -= Speed;
+			if (S)
+				SpeedY += Speed;
+			if (A)
+				SpeedX -= Speed;
+			if (D)
+				SpeedX += Speed;
+
+			Wrld.V.Move(new Vector2f(SpeedX * T, SpeedY * T));
+
 			for (int i = 0; i < Ents.Count; i++)
 				Ents[i].Update(T);
 			base.Update(T);

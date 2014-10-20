@@ -33,18 +33,28 @@ namespace TheGame.Entities {
 
 		internal static Sprite T;
 
+		// TODO: Strip off and make better culling
+
 		public static void Draw(Tile[] Tiles, Renderer R, View V, int W, int H) {
-			for (int w = 0, h = 0; h < H; w++) {
+			int TexW = (int)T.Texture.Size.X;
+			int TexH = (int)T.Texture.Size.Y;
+
+			R.SetView(V);
+
+			int VX = (int)(V.Center.X - V.Viewport.Width * V.Size.X / 3);
+			int VY = (int)(V.Center.Y - V.Viewport.Height * V.Size.Y / 3);
+
+			for (int w = VX / TexW, h = VY / TexH; h < H; w++) {
 				if (w >= W) {
 					w = 0;
 					h++;
 				}
 
-				T.Position = new Vector2f(w * T.Texture.Size.X, h * T.Texture.Size.Y);
+				T.Position = new Vector2f(w * TexW, h * TexH);
 
 				int i = w + h * W;
-				if (i >= W * H)
-					break;
+				if ((i < 0) || (i >= W * H))
+					continue;
 
 				if (Tiles[i].Enabled)
 					Tiles[i].Draw(T, R);
@@ -61,7 +71,7 @@ namespace TheGame.Entities {
 		Tile[] Tiles;
 		int W, H;
 
-		View V;
+		public View V;
 
 		public World(int W = 8, int H = 8) {
 			Tiles = new Tile[W * H];
