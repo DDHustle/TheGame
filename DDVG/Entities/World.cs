@@ -18,35 +18,87 @@ using TheGame.GUI;
 using TheGame.Entities;
 
 namespace TheGame.Entities {
-	class World : Entity {
-		Sprite A, B, C;
-		Texture Trans;
+	struct Tile {
+		public bool Enabled;
+		public Texture Tex;
 
-		public World() {
-			A = new Sprite(new Texture("data/textures/tiles/a.png"));
-			A.Scale = new Vector2f(4, 4);
-
-			B = new Sprite(new Texture("data/textures/tiles/b.png"));
-			B.Rotation = 20;
-			B.Scale = A.Scale;
-
-			C = new Sprite(new Texture("data/textures/tiles/c.png"));
-			C.Scale = B.Scale;
-
-			Trans = new Texture("data/textures/tiles/alpha.png");
+		public Tile(Texture T) {
+			Enabled = true;
+			Tex = T;
 		}
 
-		Sprite P(Sprite S, Vector2f Pos) {
-			S.Position = Pos;
-			return S;
+		static Tile() {
+			T = new Sprite(new Texture("data/textures/tiles/a.png"));
+		}
+
+		internal static Sprite T;
+
+		public static void Draw(Tile[] Tiles, Renderer R, View V, int W, int H) {
+			for (int w = 0, h = 0; h < H; w++) {
+				if (w >= W) {
+					w = 0;
+					h++;
+				}
+
+				T.Position = new Vector2f(w * T.Texture.Size.X, h * T.Texture.Size.Y);
+
+				int i = w + h * W;
+				if (i >= W * H)
+					break;
+
+				if (Tiles[i].Enabled)
+					Tiles[i].Draw(T, R);
+			}
+		}
+
+		public void Draw(Sprite S, Renderer R) {
+			S.Texture = Tex;
+			R.Draw(S);
+		}
+	}
+
+	class World : Entity {
+		Tile[] Tiles;
+		int W, H;
+
+		View V;
+
+		public World(int W = 8, int H = 8) {
+			Tiles = new Tile[W * H];
+			this.W = W;
+			this.H = H;
+
+			V = new View(new FloatRect(0, 0, 800, 600));
+
+			Texture A = new Texture("data/textures/tiles/a.png");
+			Texture B = new Texture("data/textures/tiles/b.png");
+
+			SetTile(new Tile(A), 1, 1);
+			SetTile(new Tile(A), 1, 2);
+			SetTile(new Tile(A), 1, 3);
+			SetTile(new Tile(A), 1, 4);
+
+			for (int i = 0; i < W * H; i++)
+				SetTile(new Tile(A), i);
+
+			for (int y = 1; y < 5; y++) {
+				SetTile(new Tile(B), 2, y);
+				SetTile(new Tile(B), 3, y);
+				SetTile(new Tile(B), 4, y);
+			}
+
+		}
+
+		public void SetTile(Tile T, int X, int Y) {
+			SetTile(T, X + Y * W);
+		}
+
+		public void SetTile(Tile T, int I) {
+			Tiles[I] = T;
 		}
 
 		public override void Render(Renderer R) {
-			R.Draw(P(A, new Vector2f(100, 100)));
-			R.AlphaMask(P(B, new Vector2f(150, 150)), Trans);
-
-			R.Draw(P(C, new Vector2f(250, 230)));
-
+			Tile.Draw(Tiles, R, V, W, H);
 			base.Render(R);
 		}
 	}
