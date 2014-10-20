@@ -23,11 +23,13 @@ namespace TheGame {
 		public Renderer(int W, int H)
 			: base(new VideoMode((uint)W, (uint)H), "The Game", Styles.Close) {
 			Terminal.Print("Initializing OpenTK context ... ");
+			Error.GLTry(()=>{
 			IWindowInfo Inf = Utilities.CreateWindowsWindowInfo(this.SystemHandle);
 			GraphicsContext Ctx = new GraphicsContext(GraphicsMode.Default, Inf);
 			Ctx.MakeCurrent(Inf);
 			Ctx.LoadAll();
 			Terminal.PrintLn("OK");
+			});
 
 			Terminal.PrintLn("Setting up OpenGL");
 			GL.Enable(EnableCap.StencilTest);
