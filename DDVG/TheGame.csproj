@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\StateEntity.cs" />
     <Compile Include="Entities\World.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\ButtonOutlined.cs" />

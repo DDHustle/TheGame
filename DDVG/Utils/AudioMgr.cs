@@ -64,7 +64,7 @@ namespace TheGame {
 			if (Musics.ContainsKey(Name))
 				return Musics[Name];
 			Musics.Add(Name, new Music("data/sounds/" + Name));
-			Terminal.PrintLn("Loaded music data/sounds/{0}", Name);
+			Console.WriteLine("Loaded music data/sounds/{0}", Name);
 			return GetMusic(Name);
 		}
 
@@ -72,7 +72,7 @@ namespace TheGame {
 			if (Sounds.ContainsKey(Name))
 				return Sounds[Name];
 			Sounds.Add(Name, new Sound(new SoundBuffer("data/sounds/" + Name)));
-			Terminal.PrintLn("Loaded sound data/sounds/{0}", Name);
+			Console.WriteLine("Loaded sound data/sounds/{0}", Name);
 			return GetSound(Name);
 		}
 

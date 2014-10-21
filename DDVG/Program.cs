@@ -27,7 +27,7 @@ namespace TheGame {
 				R.Render();
 			}
 
-			Terminal.PrintLn("Quitting...");
+			Console.WriteLine("Quitting...");
 			Environment.Exit(0); // Required
 		}
 	}

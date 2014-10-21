@@ -22,16 +22,16 @@ namespace TheGame {
 
 		public Renderer(int W, int H)
 			: base(new VideoMode((uint)W, (uint)H), "The Game", Styles.Close) {
-			Terminal.Print("Initializing OpenTK context ... ");
+			Console.Write("Initializing OpenTK context ... ");
 			Error.GLTry(() => {
 				IWindowInfo Inf = Utilities.CreateWindowsWindowInfo(this.SystemHandle);
 				GraphicsContext Ctx = new GraphicsContext(GraphicsMode.Default, Inf);
 				Ctx.MakeCurrent(Inf);
 				Ctx.LoadAll();
-				Terminal.PrintLn("OK");
+				Console.WriteLine("OK");
 			});
 
-			Terminal.PrintLn("Setting up OpenGL");
+			Console.WriteLine("Setting up OpenGL");
 			GL.Enable(EnableCap.StencilTest);
 			GL.Enable(EnableCap.Blend);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
@@ -58,6 +58,8 @@ namespace TheGame {
 		public void Update(float T) {
 			AudioMgr.Update(T);
 			ActiveState.Update(T);
+
+			SetTitle("FrameTime: " + (T * 1000).ToString() + " ms");
 		}
 
 		public void Render() {

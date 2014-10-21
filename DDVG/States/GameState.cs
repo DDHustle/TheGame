@@ -18,6 +18,7 @@ namespace TheGame.States {
 	class GameState : State {
 		Color ClearColor;
 
+		List<RStateEntity> RStateEnts;
 		List<Entity> Ents;
 
 		bool W, A, S, D;
@@ -27,8 +28,10 @@ namespace TheGame.States {
 			: base(R) {
 			ClearColor = new Color(12, 12, 12);
 
+			RStateEnts = new List<RStateEntity>();
 			Ents = new List<Entity>();
 
+			RStateEnts.Add(new DefaultRStateEntity());
 			Wrld = AddEntity(new World());
 		}
 
@@ -75,8 +78,8 @@ namespace TheGame.States {
 
 		public override void Render(Renderer R) {
 			R.Clear(ClearColor);
-			for (int i = 0; i < Ents.Count; i++)
-				Ents[i].Render(R);
+			for (int i = 0; i < RStateEnts.Count; i++)
+				RStateEnts[i].Render(R, Ents);
 			base.Render(R);
 		}
 	}

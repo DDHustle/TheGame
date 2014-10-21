@@ -21,7 +21,7 @@ namespace TheGame {
 			if (Fonts.ContainsKey(Name))
 				return Fonts[Name];
 			Fonts.Add(Name, new Font("data/fonts/" + Name));
-			Terminal.PrintLn("Loaded font data/fonts/{0}", Name);
+			Console.WriteLine("Loaded font data/fonts/{0}", Name);
 			return GetFont(Name);
 		}
 
