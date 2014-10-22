@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 using SFML;
 using SFML.Window;
@@ -18,6 +19,7 @@ namespace TheGame {
 
 		static Dictionary<string, Music> Musics; // Intentional
 		static Dictionary<string, Sound> Sounds;
+		static string BasePath = "data/sounds";
 
 		static List<Tuple<MusicOp, float, Music>> OpList;
 		static List<Tuple<MusicOp, float, Music>> OpQueue;
@@ -28,6 +30,18 @@ namespace TheGame {
 
 			OpList = new List<Tuple<MusicOp, float, Music>>();
 			OpQueue = new List<Tuple<MusicOp, float, Music>>();
+
+			if (!Settings.LazyLoading) {
+				string[] Files = Directory.GetFiles(BasePath, "*.*", SearchOption.TopDirectoryOnly);
+				for (int i = 0; i < Files.Length; i++) {
+					try {
+						GetMusic(Path.GetFileName(Files[i]));
+						GetSound(Path.GetFileName(Files[i]));
+					} catch (Exception E) {
+						Console.WriteLine(E.Message);
+					}
+				}
+			}
 		}
 
 
@@ -63,16 +77,16 @@ namespace TheGame {
 		public static Music GetMusic(string Name) {
 			if (Musics.ContainsKey(Name))
 				return Musics[Name];
-			Musics.Add(Name, new Music("data/sounds/" + Name));
-			Console.WriteLine("Loaded music data/sounds/{0}", Name);
+			Musics.Add(Name, new Music(Path.Combine(BasePath, Name)));
+			Console.WriteLine("Loaded music {0}", Path.Combine(BasePath, Name));
 			return GetMusic(Name);
 		}
 
 		public static Sound GetSound(string Name) {
 			if (Sounds.ContainsKey(Name))
 				return Sounds[Name];
-			Sounds.Add(Name, new Sound(new SoundBuffer("data/sounds/" + Name)));
-			Console.WriteLine("Loaded sound data/sounds/{0}", Name);
+			Sounds.Add(Name, new Sound(new SoundBuffer(Path.Combine(BasePath, Name))));
+			Console.WriteLine("Loaded sound {0}", Path.Combine(BasePath, Name));
 			return GetSound(Name);
 		}
 

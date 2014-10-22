@@ -17,7 +17,6 @@ namespace TheGame.States {
 	class MenuState : State {
 		Music SoundTrack;
 
-
 		public MenuState(Renderer R)
 			: base(R) {
 			SoundTrack = AudioMgr.GetMusic("soundtrack.ogg");

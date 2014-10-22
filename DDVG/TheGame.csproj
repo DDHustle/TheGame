@@ -73,6 +73,8 @@
     <Compile Include="Utils\Error.cs" />
     <Compile Include="Utils\FontMgr.cs" />
     <Compile Include="Utils\AudioMgr.cs" />
+    <Compile Include="Utils\GraphicsMgr.cs" />
+    <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\Terminal.cs" />
   </ItemGroup>
   <ItemGroup>

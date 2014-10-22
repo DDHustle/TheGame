@@ -70,8 +70,8 @@ namespace TheGame.Entities {
 
 			V = new View(new FloatRect(0, 0, 800, 600));
 
-			Texture A = new Texture("data/textures/tiles/a.png");
-			Texture B = new Texture("data/textures/tiles/b.png");
+			Texture A = GraphicsMgr.GetTexture("tiles/a.png");
+			Texture B = GraphicsMgr.GetTexture("tiles/b.png");
 
 			Tile Bottom = new Tile(B, false);
 			Tile Wall = new Tile(A, true);
