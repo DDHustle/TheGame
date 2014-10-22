@@ -96,9 +96,6 @@
     <Content Include="csfml-window-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\sounds\soundtrack.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="data\sounds\tick.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
