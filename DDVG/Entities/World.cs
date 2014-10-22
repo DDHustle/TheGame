@@ -35,25 +35,23 @@ namespace TheGame.Entities {
 		internal static Sprite T;
 
 		public static void Draw(Renderer R, Tile[,] Tiles, int W, int H, View V) {
-			int TexW = (int)T.Texture.Size.X;
-			int TexH = (int)T.Texture.Size.Y;
+			int TexSz = (int)T.Texture.Size.X;
 
-			/*int VX = (int)(V.Center.X - V.Viewport.Width * V.Size.X / 3);
-			int VY = (int)(V.Center.Y - V.Viewport.Height * V.Size.Y / 3);*/
+			Vector2f LeftViewCorner = (V.Center - (new Vector2f(V.Viewport.Width * V.Size.X, V.Viewport.Height * V.Size.Y) / 2));
+			LeftViewCorner /= TexSz;
 
-			for (int x = 0; x < W; x++)
-				for (int y = 0; y < H; y++) {
-					T.Position = new Vector2f(x * TexW, y * TexH);
+			int VX = MathHelper.Clamp((int)LeftViewCorner.X, 0, W);
+			int VXm = MathHelper.Clamp(VX + 14, 0, W);
+			int VY = MathHelper.Clamp((int)LeftViewCorner.Y, 0, H);
+			int VYm = MathHelper.Clamp(VY + 11, 0, H);
 
-					if (Tiles[x, y].Enabled)
-						Tiles[x, y].Draw(T, R);
-
-				}
-		}
-
-		public void Draw(Sprite S, Renderer R) {
-			S.Texture = Tex;
-			R.Draw(S);
+			for (int x = VX; x < VXm; x++)
+				for (int y = VY; y < VYm; y++)
+					if (Tiles[x, y].Enabled) {
+						T.Position = new Vector2f(x * TexSz, y * TexSz);
+						T.Texture = Tiles[x, y].Tex;
+						R.Draw(T);
+					}
 		}
 	}
 
@@ -62,6 +60,10 @@ namespace TheGame.Entities {
 		int W, H;
 
 		public View V;
+
+		public override bool InRange(Vector2f Pos, float Range) {
+			return true; // World is EVERYWERE! MUHAHAHAHAHAHHAHAHAHHAHA
+		}
 
 		public World(int W = 20, int H = 20) {
 			Tiles = new Tile[W, H];

@@ -76,6 +76,7 @@
     <Compile Include="Utils\GraphicsMgr.cs" />
     <Compile Include="Utils\Settings.cs" />
     <Compile Include="Utils\Terminal.cs" />
+    <Compile Include="Utils\Meth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
