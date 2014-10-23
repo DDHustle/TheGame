@@ -20,12 +20,14 @@ namespace TheGame {
 
 			while (R.IsOpen()) {
 				R.DispatchEvents();
+				while (SWatch.ElapsedMilliseconds < 16)
+					;
 				R.Update((float)SWatch.ElapsedMilliseconds / 1000f);
-				R.Render();
 				SWatch.Restart();
+				R.Render();
 			}
 
-			Terminal.PrintLn("Quitting...");
+			Console.WriteLine("Quitting...");
 			Environment.Exit(0); // Required
 		}
 	}

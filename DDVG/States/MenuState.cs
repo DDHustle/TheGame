@@ -17,7 +17,6 @@ namespace TheGame.States {
 	class MenuState : State {
 		Music SoundTrack;
 
-
 		public MenuState(Renderer R)
 			: base(R) {
 			SoundTrack = AudioMgr.GetMusic("soundtrack.ogg");
@@ -34,7 +33,7 @@ namespace TheGame.States {
 			OptionsButton.Position = new Vector2f(365f, 300f);
 			OptionsButton.Size = new Vector2f(120f, 50f);
 			OptionsButton.MouseClick += (B, X, Y, Down) => {
-				Terminal.PrintLn("You clicked on the fucking settings button. Are you happy now?");
+				Console.WriteLine("You clicked on the fucking settings button. Are you happy now?");
 			};
 
 			ButtonOutlined QuitButton = new ButtonOutlined(UI, "Quit", FontMgr.GetFont("framd.ttf"));
@@ -47,14 +46,13 @@ namespace TheGame.States {
 		}
 
 		public override void Deactivate(State NewState) {
-			SoundTrack.Loop = false;
-			SoundTrack.Stop();
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 100);
 			base.Deactivate(NewState);
 		}
 
 		public override void Activate(State OldState) {
 			SoundTrack.Loop = true;
-			SoundTrack.Play();
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeIn, SoundTrack, 100);
 			base.Activate(OldState);
 		}
 
