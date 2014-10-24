@@ -17,6 +17,7 @@ namespace TheGame {
 			SWatch.Start();
 
 			R.SwitchState(new MenuState(R));
+			R.Init();
 
 			while (R.IsOpen()) {
 				R.DispatchEvents();

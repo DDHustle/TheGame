@@ -19,25 +19,18 @@ namespace TheGame {
 	class Renderer : RenderWindow {
 		public State ActiveState;
 		public Stopwatch GameTime;
+		public sbyte FrameByte;
 
-		public Renderer(int W, int H)
-			: base(new VideoMode((uint)W, (uint)H), "The Game", Styles.Close) {
-			Console.Write("Initializing OpenTK context ... ");
-			Error.GLTry(() => {
-				IWindowInfo Inf = Utilities.CreateWindowsWindowInfo(this.SystemHandle);
-				GraphicsContext Ctx = new GraphicsContext(GraphicsMode.Default, Inf);
-				Ctx.MakeCurrent(Inf);
-				Ctx.LoadAll();
-				Console.WriteLine("OK");
-			});
+		public RenderTexture LightBuffer;
+		internal Sprite BufferSprite;
 
-			Console.WriteLine("Setting up OpenGL");
-			GL.Enable(EnableCap.StencilTest);
-			GL.Enable(EnableCap.Blend);
-			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-
+		public Renderer(uint W, uint H)
+			: base(new VideoMode(W, H), "The Game", Styles.Close) {
 			GameTime = new Stopwatch();
 			GameTime.Start();
+
+			LightBuffer = new RenderTexture(Size.X, Size.Y);
+			BufferSprite = new Sprite(LightBuffer.Texture);
 
 			Closed += (S, E) => Close();
 			TextEntered += (S, E) => ActiveState.TextEntered(E.Unicode);
@@ -46,6 +39,19 @@ namespace TheGame {
 			MouseMoved += (S, E) => ActiveState.MouseMove(E);
 			MouseButtonPressed += (S, E) => ActiveState.MouseClick(E, true);
 			MouseButtonReleased += (S, E) => ActiveState.MouseClick(E, false);
+		}
+
+		public void Init() {
+			Console.Write("Initializing OpenTK context ... ");
+			IWindowInfo Inf = Utilities.CreateWindowsWindowInfo(this.SystemHandle);
+			GraphicsContext Ctx = new GraphicsContext(GraphicsMode.Default, Inf);
+			Ctx.MakeCurrent(Inf);
+			Ctx.LoadAll();
+			Console.WriteLine("OK");
+
+			/*Console.WriteLine("Setting up OpenGL");
+			GL.Enable(EnableCap.Blend);
+			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);*/
 		}
 
 		public void SwitchState(State NewState) {
@@ -62,7 +68,23 @@ namespace TheGame {
 			SetTitle("FrameTime: " + (T * 1000).ToString() + " ms");
 		}
 
+		public void RenderRT(RenderTexture RT, bool SuppressDisplay = false) {
+			if (!SuppressDisplay)
+				RT.Display();
+			View V = GetView();
+			SetView(DefaultView);
+			BufferSprite.Texture = RT.Texture;
+			base.Draw(BufferSprite);
+			SetView(V);
+		}
+
 		public void Render() {
+			if (FrameByte == 1)
+				FrameByte = 2;
+			else
+				FrameByte = 1;
+
+			SetActive(true);
 			ActiveState.Render(this);
 			Display();
 		}
@@ -74,18 +96,12 @@ namespace TheGame {
 
 		public void AlphaMask(Sprite S, Texture Alpha) {
 			GL.BlendFuncSeparate(BlendingFactorSrc.Zero, BlendingFactorDest.One, BlendingFactorSrc.SrcColor, BlendingFactorDest.Zero);
-
-			// Swap to alpha texture and draw it
 			Texture Orig = S.Texture;
 			S.Texture = Alpha;
 			Draw(S);
-
 			GL.BlendFunc(BlendingFactorSrc.DstAlpha, BlendingFactorDest.OneMinusDstAlpha);
-
-			// Swap to normal texture and draw with alpha of alpha texture
 			S.Texture = Orig;
 			Draw(S);
-
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 		}
 	}

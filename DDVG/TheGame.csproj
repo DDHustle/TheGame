@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\StateEntity.cs" />
+    <Compile Include="Entities\Light.cs" />
     <Compile Include="Entities\World.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\ButtonOutlined.cs" />
@@ -70,7 +70,6 @@
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
-    <Compile Include="Utils\Error.cs" />
     <Compile Include="Utils\FontMgr.cs" />
     <Compile Include="Utils\AudioMgr.cs" />
     <Compile Include="Utils\GraphicsMgr.cs" />
@@ -103,10 +102,10 @@
     <Content Include="data\textures\car.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\textures\tiles\a.png">
+    <Content Include="data\textures\lightmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\textures\tiles\alpha.png">
+    <Content Include="data\textures\tiles\a.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\textures\tiles\b.png">

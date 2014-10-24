@@ -61,10 +61,6 @@ namespace TheGame.Entities {
 
 		public View V;
 
-		public override bool InRange(Vector2f Pos, float Range) {
-			return true; // World is EVERYWERE! MUHAHAHAHAHAHHAHAHAHHAHA
-		}
-
 		public World(int W = 20, int H = 20) {
 			Tiles = new Tile[W, H];
 			this.W = W;

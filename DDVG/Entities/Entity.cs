@@ -14,15 +14,28 @@ namespace TheGame.Entities {
 			set;
 		}
 
+		/*public virtual bool DrawOnce {
+			get {
+				return true;
+			}
+		}
+
+		internal sbyte FrameByte;
+
+		public Entity() {
+			FrameByte = -1;
+		}
+
+		public virtual bool ShouldDraw(Renderer R) {
+			bool Ret = FrameByte == R.FrameByte;
+			FrameByte = R.FrameByte;
+
+			if (Ret && DrawOnce)
+				return false;
+			return true;
+		}*/
+
 		public virtual void Update(float T) {
-		}
-
-		public virtual bool InRange(RStateEntity E, float Range) {
-			return InRange(E.Position, Range);
-		}
-
-		public virtual bool InRange(Vector2f Pos, float Range) {
-			return Position.Distance(Pos) < Range;
 		}
 
 		public virtual void Render(Renderer R) {

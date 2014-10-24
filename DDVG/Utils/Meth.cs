@@ -12,6 +12,10 @@ namespace TheGame {
 			return ((B.X - A.X).Pow() + (B.Y - A.Y).Pow()).Sqrt();
 		}
 
+		public static bool InRange(this Vector2f A, Vector2f B, float Range) {
+			return A.Distance(B) < Range;
+		}
+
 		public static float Pow(this float A, float Pwr = 2) {
 			if (Pwr == 2)
 				return A * A;
