@@ -85,7 +85,7 @@ namespace TheGame {
 				FrameByte = 1;
 
 			SetActive(true);
-			ActiveState.Render(this);
+			ActiveState.OnRender(this);
 			Display();
 		}
 

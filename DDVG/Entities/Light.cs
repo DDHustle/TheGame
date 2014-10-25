@@ -33,9 +33,13 @@ namespace TheGame.Entities {
 			LSprite.Color = Clr;
 		}
 
-		public void Render(View V, Renderer R) {
+		public void Render(World W, View V, Renderer R) {
 			if (!Position.InRange(V.Center, (V.Size.X.Pow() + V.Size.Y.Pow()).Sqrt()))
 				return;
+
+			Shape[] ShadowShapes = W.GetShadowMesh(Position, Range);
+			foreach (var SS in ShadowShapes)
+				R.Draw(SS);
 
 			R.LightBuffer.Draw(LSprite);
 		}

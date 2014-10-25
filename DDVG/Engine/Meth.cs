@@ -25,5 +25,15 @@ namespace TheGame {
 		public static float Sqrt(this float A) {
 			return (float)Math.Sqrt(A);
 		}
+
+		public static float Dot(this Vector2f A, Vector2f B) {
+			return A.X * B.X + A.Y * B.Y;
+		}
+
+		public static float Angle(this Vector2f A, Vector2f B) {
+			float xD = A.X - B.X;
+			float yD = A.Y - B.Y;
+			return (float)(Math.Atan2(yD, xD) /** 180.0 / Math.PI*/);
+		}
 	}
 }

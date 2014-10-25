@@ -13,11 +13,14 @@ namespace TheGame.States {
 		internal Renderer RendererBase;
 		internal GUIBase UI;
 
+		public View View;
+
 		public State(Renderer R) {
 			RendererBase = R;
 			UI = new GUIBase(R);
+			View = new View(R.GetView());
 		}
-		
+
 		public virtual void Deactivate(State NewState) {
 		}
 
@@ -42,8 +45,22 @@ namespace TheGame.States {
 			UI.Update(T);
 		}
 
+		public virtual void OnRender(Renderer R) {
+			PreRender(R);
+			Render(R);
+			PostRender(R);
+		}
+
+		public virtual void PreRender(Renderer R) {
+			R.SetView(View);
+		}
+
 		public virtual void Render(Renderer R) {
 			UI.Render(R);
+		}
+
+		public virtual void PostRender(Renderer R) {
+
 		}
 	}
 }

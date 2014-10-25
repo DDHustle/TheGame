@@ -36,9 +36,6 @@ C:\Users\Cody\Documents\GitHub\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssem
 E:\Projects\TheGame\bin\data\sounds\tick.wav
 E:\Projects\TheGame\bin\data\fonts\framd.ttf
 E:\Projects\TheGame\bin\data\sounds\soundtrack.ogg
-E:\Projects\TheGame\bin\data\textures\tiles\a.png
-E:\Projects\TheGame\bin\data\textures\tiles\b.png
-E:\Projects\TheGame\bin\data\textures\tiles\c.png
 C:\Projects\TheGame\bin\csfml-audio-2.dll
 C:\Projects\TheGame\bin\csfml-graphics-2.dll
 C:\Projects\TheGame\bin\csfml-window-2.dll
@@ -61,3 +58,4 @@ C:\Projects\TheGame\DDVG\obj\Debug\TheGame.exe
 C:\Projects\TheGame\DDVG\obj\Debug\TheGame.pdb
 E:\Projects\TheGame\bin\data\textures\lightmask.png
 E:\Projects\TheGame\DDVG\obj\Debug\TheGame.csprojResolveAssemblyReference.cache
+E:\Projects\TheGame\bin\data\textures\worldset.png

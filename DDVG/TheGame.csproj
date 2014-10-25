@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Extensions.cs" />
+    <Compile Include="Engine\Polymesh.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Light.cs" />
     <Compile Include="Entities\World.cs" />
@@ -70,12 +72,13 @@
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
-    <Compile Include="Utils\FontMgr.cs" />
-    <Compile Include="Utils\AudioMgr.cs" />
-    <Compile Include="Utils\GraphicsMgr.cs" />
-    <Compile Include="Utils\Settings.cs" />
-    <Compile Include="Utils\Terminal.cs" />
-    <Compile Include="Utils\Meth.cs" />
+    <Compile Include="Engine\Managers\FontMgr.cs" />
+    <Compile Include="Engine\Managers\AudioMgr.cs" />
+    <Compile Include="Engine\Managers\GraphicsMgr.cs" />
+    <Compile Include="Engine\Managers\TileMgr.cs" />
+    <Compile Include="Engine\Settings.cs" />
+    <Compile Include="Engine\Terminal.cs" />
+    <Compile Include="Engine\Meth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -105,13 +108,7 @@
     <Content Include="data\textures\lightmask.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\textures\tiles\a.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\textures\tiles\b.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\textures\tiles\c.png">
+    <Content Include="data\textures\worldset.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="libsndfile-1.dll">

@@ -35,17 +35,14 @@ namespace TheGame.States {
 			Ents = new List<Entity>();
 			Lights = new List<Light>();
 
-			MLight = new Light(new Vector2f(0, 0), 500, Color.Yellow);
-			R.MouseMoved += (S, E) => {
-				MLight.Position = R.MapPixelToCoords(new Vector2i(E.X, E.Y), Wrld.V);
-			};
+			MLight = new Light(new Vector2f(0, 0), 200, Color.Yellow);
 
-			Lights.Add(new Light(new Vector2f(250, 250), 500, Color.Red));
+			/*Lights.Add(new Light(new Vector2f(250, 250), 500, Color.Red));
 			Lights.Add(new Light(new Vector2f(180, 350), 500, Color.Green));
-			Lights.Add(new Light(new Vector2f(320, 350), 500, Color.Blue));
+			Lights.Add(new Light(new Vector2f(320, 350), 500, Color.Blue));*/
 			Lights.Add(MLight);
 
-			Wrld = AddEntity(new World());
+			Wrld = new World();
 		}
 
 		public T AddEntity<T>(T E) where T : Entity {
@@ -57,6 +54,11 @@ namespace TheGame.States {
 			Ents.Remove(E);
 		}
 
+		public override void MouseMove(MouseMoveEventArgs E) {
+			MLight.Position = View.ToWorld(E.ToVector2f());
+			base.MouseMove(E);
+		}
+
 		public override void Key(KeyEventArgs K, bool Down) {
 			if (K.Code == Keyboard.Key.W) // TODO: Strip off, better input system
 				W = Down;
@@ -66,6 +68,8 @@ namespace TheGame.States {
 				A = Down;
 			if (K.Code == Keyboard.Key.D)
 				D = Down;
+
+			base.Key(K, Down);
 		}
 
 		public override void Update(float T) {
@@ -82,7 +86,7 @@ namespace TheGame.States {
 			if (D)
 				SpeedX += Speed;
 
-			Wrld.V.Move(new Vector2f(SpeedX * T, SpeedY * T));
+			View.Move(new Vector2f(SpeedX * T, SpeedY * T));
 
 			for (int i = 0; i < Ents.Count; i++)
 				Ents[i].Update(T);
@@ -91,25 +95,22 @@ namespace TheGame.States {
 
 		public override void Render(Renderer R) {
 			R.Clear(ClearColor);
-			View V = R.GetView();
+			Wrld.Render(R, View);
 
 			for (int i = 0; i < Ents.Count; i++)
 				Ents[i].Render(R);
 
 			R.PushGLStates();
 			R.LightBuffer.Clear(new Color(12, 12, 15));
-			R.LightBuffer.SetView(V);
-
+			R.LightBuffer.SetView(View);
 			GL.BlendEquation(BlendEquationMode.Max);
 
 			for (int i = 0; i < Lights.Count; i++)
-				Lights[i].Render(V, R);
+				Lights[i].Render(Wrld, View, R);
 
 			R.SetActive(true);
-
 			GL.BlendFunc(BlendingFactorSrc.Zero, BlendingFactorDest.SrcColor);
 			GL.BlendEquation(BlendEquationMode.FuncAdd);
-
 			R.RenderRT(R.LightBuffer);
 			R.PopGLStates();
 
