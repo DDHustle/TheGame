@@ -111,8 +111,7 @@ namespace TheGame.GUI {
 				return;
 
 			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.Update(T);
+				E.Update(T);
 		}
 
 
@@ -126,20 +125,17 @@ namespace TheGame.GUI {
 
 		public virtual void PreRender(Renderer R) {
 			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.PreRender(R);
+				E.PreRender(R);
 		}
 
 		public virtual void Render(Renderer R) {
 			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.Render(R);
+				E.Render(R);
 		}
 
 		public virtual void PostRender(Renderer R) {
 			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.PostRender(R);
+				E.PostRender(R);
 		}
 
 		public virtual void OnMouseEnter(int X, int Y) {
@@ -163,7 +159,7 @@ namespace TheGame.GUI {
 				return;
 
 			foreach (UIElement E in Elements)
-				if (E.Active && E.IsInside(X, Y))
+				if (E.IsInside(X, Y))
 					E.OnMouseClick(B, X, Y, Down);
 			if (MouseClick != null)
 				MouseClick(B, X, Y, Down);
@@ -190,7 +186,7 @@ namespace TheGame.GUI {
 			if (!Active)
 				return;
 			UIElement E = FocusedElement;
-			if (E != null && E.Active && E.KeyPressed != null)
+			if (E != null && E.KeyPressed != null)
 				E.KeyPressed(Code, Ctrl, Shift, Alt, System, Down);
 		}
 
@@ -198,7 +194,7 @@ namespace TheGame.GUI {
 			if (!Active)
 				return;
 			UIElement E = FocusedElement;
-			if (E != null && E.Active && E.TextEntered != null)
+			if (E != null && E.TextEntered != null)
 				E.TextEntered(Str);
 		}
 	}
