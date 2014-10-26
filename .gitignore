@@ -3,3 +3,4 @@
 *.vshost*
 *.exe.config
 *.pdb
+obj\*
