@@ -15,10 +15,18 @@ namespace TheGame.GUI {
 			: base(B) {
 
 			Background = new RectangleShape();
-			Background.Position = new Vector2f();
-			Background.Size = new Vector2f(B.Renderer.Size.X, 300);
+			Position = Background.Position = new Vector2f();
+			Size = Background.Size = new Vector2f(B.Renderer.Size.X, 350);
 			Background.FillColor = new Color(12, 12, 12, 100);
 
+			KeyPressed += KeyPressedEvent;
+		}
+
+		void KeyPressedEvent(Keyboard.Key Code, bool Ctrl, bool Shift, bool Alt, bool System, bool Down) {
+			if (Down && (Code == Keyboard.Key.Tilde || Code == Keyboard.Key.Escape)) {
+				Active = false;
+				UI.Focused = true;
+			}
 		}
 
 		public override void Render(Renderer R) {

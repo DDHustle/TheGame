@@ -10,40 +10,10 @@ using SFML.Window;
 
 namespace TheGame.GUI {
 	class UIElement {
-		List<UIElement> Elements;
+		LinkedList<UIElement> Elements;
+		UIElement[] ElementsFlat;
+
 		UIElement Parent;
-
-		public virtual bool Focused {
-			get {
-				return FocusedElement == this;
-			}
-			set {
-				if (value) {
-					FocusedElement = this;
-					Active = true;
-				} else
-					UI.Focused = true;
-			}
-		}
-
-		public virtual UIElement FocusedElement {
-			get {
-				return Parent.FocusedElement;
-			}
-			set {
-				Parent.FocusedElement = value;
-			}
-		}
-
-		public virtual bool Active {
-			get;
-			set;
-		}
-
-		public virtual GUIBase UI {
-			get;
-			internal set;
-		}
 
 		public Renderer Renderer {
 			get {
@@ -68,6 +38,39 @@ namespace TheGame.GUI {
 			internal set;
 		}
 
+		public virtual bool Focused {
+			get {
+				return FocusedElement == this;
+			}
+			set {
+				if (value) {
+					FocusedElement = this;
+					Active = true;
+					Parent.ToFront(this);
+				} else
+					UI.Focused = true;
+			}
+		}
+
+		public virtual UIElement FocusedElement {
+			get {
+				return Parent.FocusedElement;
+			}
+			set {
+				Parent.FocusedElement = value;
+			}
+		}
+
+		public virtual bool Active {
+			get;
+			set;
+		}
+
+		public virtual GUIBase UI {
+			get;
+			internal set;
+		}
+
 		public virtual Vector2f Position {
 			get;
 			set;
@@ -79,7 +82,7 @@ namespace TheGame.GUI {
 		}
 
 		public UIElement(GUIBase UI) {
-			Elements = new List<UIElement>();
+			Elements = new LinkedList<UIElement>();
 			this.UI = UI;
 			Active = true;
 		}
@@ -88,14 +91,25 @@ namespace TheGame.GUI {
 			if (E.Parent != null)
 				throw new Exception("Cannot add owned element");
 			E.Parent = this;
-			Elements.Add(E);
+
+			Elements.AddFirst(E);
+			ElementsFlat = GetElements();
 		}
 
 		public void RemoveElement(UIElement E) {
 			if (E.Parent != this || !Elements.Contains(E))
 				throw new Exception("Cannot remove not owned element");
 			E.Parent = null;
-			Elements.Remove(E);
+
+			while (Elements.Contains(E))
+				Elements.Remove(E);
+
+			ElementsFlat = GetElements();
+		}
+
+		public void ToFront(UIElement E) {
+			RemoveElement(E);
+			AddElement(E);
 		}
 
 		public UIElement[] GetElements() {
@@ -125,21 +139,21 @@ namespace TheGame.GUI {
 		}
 
 		public virtual void PreRender(Renderer R) {
-			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.PreRender(R);
+			for (int i = Elements.Count - 1; i >= 0; i--)
+				if (ElementsFlat[i].Active)
+					ElementsFlat[i].PreRender(R);
 		}
 
 		public virtual void Render(Renderer R) {
-			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.Render(R);
+			for (int i = Elements.Count - 1; i >= 0; i--)
+				if (ElementsFlat[i].Active)
+					ElementsFlat[i].Render(R);
 		}
 
 		public virtual void PostRender(Renderer R) {
-			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.PostRender(R);
+			for (int i = Elements.Count - 1; i >= 0; i--)
+				if (ElementsFlat[i].Active)
+					ElementsFlat[i].PostRender(R);
 		}
 
 		public virtual void OnMouseEnter(int X, int Y) {
@@ -163,8 +177,11 @@ namespace TheGame.GUI {
 				return;
 
 			foreach (UIElement E in Elements)
-				if (E.Active && E.IsInside(X, Y))
+				if (E.Active && E.IsInside(X, Y)) {
 					E.OnMouseClick(B, X, Y, Down);
+					break;
+				}
+
 			if (MouseClick != null)
 				MouseClick(B, X, Y, Down);
 		}
@@ -179,9 +196,16 @@ namespace TheGame.GUI {
 				OnMouseLeave(X, Y);
 			MouseInside = Inside;
 
-			foreach (UIElement E in Elements)
-				if (E.Active)
-					E.OnMouseMove(X, Y, E.IsInside(X, Y));
+			bool WasIn = false;
+			for (int i = 0; i < Elements.Count; i++)
+				if (ElementsFlat[i].Active) {
+					bool In = false;
+					if (!WasIn)
+						In = ElementsFlat[i].IsInside(X, Y);
+					if (In)
+						WasIn = true;
+					ElementsFlat[i].OnMouseMove(X, Y, In);
+				}
 
 			if (Inside && MouseMove != null)
 				MouseMove(X, Y);
