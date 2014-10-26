@@ -55,7 +55,7 @@ namespace TheGame.GUI {
 		}
 
 		void KeyPressedEvent(Keyboard.Key Code, bool Ctrl, bool Shift, bool Alt, bool System, bool Down) {
-			if (Down && Code == Keyboard.Key.Tilde) {
+			if (Down && Code == Keyboard.Key.F1) {
 				Con.Focused = true;
 			}
 		}

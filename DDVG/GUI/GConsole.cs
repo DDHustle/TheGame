@@ -23,7 +23,7 @@ namespace TheGame.GUI {
 		}
 
 		void KeyPressedEvent(Keyboard.Key Code, bool Ctrl, bool Shift, bool Alt, bool System, bool Down) {
-			if (Down && (Code == Keyboard.Key.Tilde || Code == Keyboard.Key.Escape)) {
+			if (Down && (Code == Keyboard.Key.F1 || Code == Keyboard.Key.Escape)) {
 				Active = false;
 				UI.Focused = true;
 			}

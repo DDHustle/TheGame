@@ -35,11 +35,11 @@ namespace TheGame.States {
 			Ents = new List<Entity>();
 			Lights = new List<Light>();
 
-			MLight = new Light(new Vector2f(0, 0), 1000, Color.Green);
+			MLight = new Light(new Vector2f(0, 0), 500, Color.White);
 
-			/*Lights.Add(new Light(new Vector2f(250, 300), 1000, Color.Red));
-			Lights.Add(new Light(new Vector2f(180, 400), 1000, Color.Green));
-			Lights.Add(new Light(new Vector2f(320, 400), 1000, Color.Blue));*/
+			Lights.Add(new Light(new Vector2f(350, 150), 500, Color.Red));
+			Lights.Add(new Light(new Vector2f(400, 550), 500, Color.Green));
+			Lights.Add(new Light(new Vector2f(500, 300), 500, Color.Blue));
 			Lights.Add(MLight);
 
 			Wrld = new World();
@@ -106,7 +106,7 @@ namespace TheGame.States {
 
 
 			R.PushGLStates();
-			R.LightBuffer.Clear(new Color(125, 125, 125));
+			R.LightBuffer.Clear(new Color(10, 10, 14));
 			GL.BlendEquation(BlendEquationMode.Max);
 			for (int i = 0; i < Lights.Count; i++)
 				if (Lights[i].Position.InRange(View.Center, (View.Size.X.Pow() + View.Size.Y.Pow()).Sqrt())) {
