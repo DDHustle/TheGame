@@ -25,8 +25,8 @@ namespace TheGame {
 		public RenderTexture LightBuffer2;
 		internal Sprite BufferSprite;
 
-		public Renderer(uint W, uint H, ContextSettings Settings)
-			: base(new VideoMode(W, H), "The Game", Styles.Close, Settings) {
+		public Renderer(uint W, uint H)
+			: base(new VideoMode(W, H), "The Game", Styles.Close) {
 			GameTime = new Stopwatch();
 			GameTime.Start();
 

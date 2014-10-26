@@ -28,9 +28,11 @@ namespace TheGame.States {
 		}
 
 		public virtual void TextEntered(string S) {
+			UI.OnString(S);
 		}
 
 		public virtual void Key(KeyEventArgs K, bool Down) {
+			UI.OnKey(K.Code, K.Control, K.Shift, K.Alt, K.System, Down);
 		}
 
 		public virtual void MouseMove(MouseMoveEventArgs E) {
@@ -56,7 +58,7 @@ namespace TheGame.States {
 		}
 
 		public virtual void Render(Renderer R) {
-			UI.Render(R);
+			UI.OnRender(R);
 		}
 
 		public virtual void PostRender(Renderer R) {

@@ -13,7 +13,34 @@ namespace TheGame.GUI {
 		List<UIElement> Elements;
 		UIElement Parent;
 
-		public GUIBase UI {
+		public virtual bool Focused {
+			get {
+				return FocusedElement == this;
+			}
+			set {
+				if (value) {
+					FocusedElement = this;
+					Active = true;
+				} else
+					UI.Focused = true;
+			}
+		}
+
+		public virtual UIElement FocusedElement {
+			get {
+				return Parent.FocusedElement;
+			}
+			set {
+				Parent.FocusedElement = value;
+			}
+		}
+
+		public virtual bool Active {
+			get;
+			set;
+		}
+
+		public virtual GUIBase UI {
 			get;
 			internal set;
 		}
@@ -24,10 +51,17 @@ namespace TheGame.GUI {
 			}
 		}
 
-		public event Action<int, int> MouseEnter;
-		public event Action<int, int> MouseLeave;
-		public event Action<Mouse.Button, int, int, bool> MouseClick;
-		public event Action<int, int> MouseMove;
+		public delegate void MouseDel(int X, int Y);
+		public delegate void KeyPressedDel(Keyboard.Key Code, bool Ctrl, bool Shift, bool Alt, bool System, bool Down);
+		public delegate void MouseClickDel(Mouse.Button B, int X, int Y, bool Down);
+		public delegate void TextEnteredDel(string In);
+
+		public event MouseDel MouseEnter;
+		public event MouseDel MouseLeave;
+		public event MouseClickDel MouseClick;
+		public event MouseDel MouseMove;
+		public event KeyPressedDel KeyPressed;
+		public event TextEnteredDel TextEntered;
 
 		public bool MouseInside {
 			get;
@@ -47,6 +81,7 @@ namespace TheGame.GUI {
 		public UIElement(GUIBase UI) {
 			Elements = new List<UIElement>();
 			this.UI = UI;
+			Active = true;
 		}
 
 		public void AddElement(UIElement E) {
@@ -67,19 +102,30 @@ namespace TheGame.GUI {
 			return Elements.ToArray();
 		}
 
-		public T GetTopParent<T>() where T : UIElement {
-			if (Parent != null)
-				return Parent.GetTopParent<T>();
-			return (T)this;
-		}
-
 		public bool IsInside(float X, float Y) {
 			return X > Position.X && Y > Position.Y && X < (Position.X + Size.X) && Y < (Position.Y + Size.Y);
 		}
 
 		public virtual void Update(float T) {
+			if (!Active)
+				return;
+
 			foreach (UIElement E in Elements)
 				E.Update(T);
+		}
+
+
+		public virtual void OnRender(Renderer R) {
+			if (!Active)
+				return;
+			PreRender(R);
+			Render(R);
+			PostRender(R);
+		}
+
+		public virtual void PreRender(Renderer R) {
+			foreach (UIElement E in Elements)
+				E.PreRender(R);
 		}
 
 		public virtual void Render(Renderer R) {
@@ -87,17 +133,31 @@ namespace TheGame.GUI {
 				E.Render(R);
 		}
 
+		public virtual void PostRender(Renderer R) {
+			foreach (UIElement E in Elements)
+				E.PostRender(R);
+		}
+
 		public virtual void OnMouseEnter(int X, int Y) {
+			if (!Active)
+				return;
+
 			if (MouseEnter != null)
 				MouseEnter(X, Y);
 		}
 
 		public virtual void OnMouseLeave(int X, int Y) {
+			if (!Active)
+				return;
+
 			if (MouseLeave != null)
 				MouseLeave(X, Y);
 		}
 
 		public virtual void OnMouseClick(Mouse.Button B, int X, int Y, bool Down) {
+			if (!Active)
+				return;
+
 			foreach (UIElement E in Elements)
 				if (E.IsInside(X, Y))
 					E.OnMouseClick(B, X, Y, Down);
@@ -106,6 +166,9 @@ namespace TheGame.GUI {
 		}
 
 		public virtual void OnMouseMove(int X, int Y, bool Inside) {
+			if (!Active)
+				return;
+
 			if (Inside && !MouseInside)
 				OnMouseEnter(X, Y);
 			else if (!Inside && MouseInside)
@@ -117,6 +180,22 @@ namespace TheGame.GUI {
 
 			if (Inside && MouseMove != null)
 				MouseMove(X, Y);
+		}
+
+		public virtual void OnKey(Keyboard.Key Code, bool Ctrl, bool Shift, bool Alt, bool System, bool Down) {
+			if (!Active)
+				return;
+			UIElement E = FocusedElement;
+			if (E != null && E.KeyPressed != null)
+				E.KeyPressed(Code, Ctrl, Shift, Alt, System, Down);
+		}
+
+		public virtual void OnString(string Str) {
+			if (!Active)
+				return;
+			UIElement E = FocusedElement;
+			if (E != null && E.TextEntered != null)
+				E.TextEntered(Str);
 		}
 	}
 }

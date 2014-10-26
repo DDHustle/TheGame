@@ -12,8 +12,7 @@ namespace TheGame {
 		static void Main(string[] args) {
 			Console.Title = "The Game Console";
 
-			ContextSettings CS = new ContextSettings(24, 8, 0, 0, 0);
-			Renderer R = new Renderer(800, 600, CS);
+			Renderer R = new Renderer(800, 600);
 			Stopwatch SWatch = new Stopwatch();
 			SWatch.Start();
 

@@ -60,6 +60,10 @@ namespace TheGame.States {
 		}
 
 		public override void Key(KeyEventArgs K, bool Down) {
+			base.Key(K, Down);
+			if (!UI.Focused)
+				return;
+
 			if (K.Code == Keyboard.Key.W) // TODO: Strip off, better input system
 				W = Down;
 			if (K.Code == Keyboard.Key.S)
@@ -68,8 +72,6 @@ namespace TheGame.States {
 				A = Down;
 			if (K.Code == Keyboard.Key.D)
 				D = Down;
-
-			base.Key(K, Down);
 		}
 
 		public override void Update(float T) {

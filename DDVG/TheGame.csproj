@@ -64,6 +64,7 @@
     <Compile Include="Entities\World.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\ButtonOutlined.cs" />
+    <Compile Include="GUI\GConsole.cs" />
     <Compile Include="GUI\GUIBase.cs" />
     <Compile Include="GUI\UIElement.cs" />
     <Compile Include="Program.cs" />
