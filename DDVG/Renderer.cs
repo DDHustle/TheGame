@@ -58,6 +58,7 @@ namespace TheGame {
 			Console.WriteLine("Setting up OpenGL");
 			GL.Enable(EnableCap.Blend);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+
 		}
 
 		public void SwitchState(State NewState) {
@@ -117,28 +118,6 @@ namespace TheGame {
 
 		public void ClearStencil() {
 			GL.Clear(ClearBufferMask.StencilBufferBit);
-		}
-
-		public void StencilMask(Action Mask, Action Inside, Action Outside) {
-			GL.Enable(EnableCap.StencilTest);
-			GL.ColorMask(false, false, false, false);
-			GL.DepthMask(false);
-			GL.StencilFunc(StencilFunction.Never, 1, 0xFF);
-			GL.StencilOp(StencilOp.Replace, StencilOp.Keep, StencilOp.Keep);
-			GL.StencilMask(0xFF);
-			Mask();
-			GL.ColorMask(true, true, true, true);
-			GL.DepthMask(true);
-			GL.StencilMask(0x00);
-			if (Outside != null) {
-				GL.StencilFunc(StencilFunction.Equal, 0, 0xFF);
-				Outside();
-			}
-			if (Inside != null) {
-				GL.StencilFunc(StencilFunction.Equal, 1, 0xFF);
-				Inside();
-			}
-			GL.Disable(EnableCap.StencilTest);
 		}
 	}
 }

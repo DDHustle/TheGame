@@ -38,11 +38,23 @@ namespace TheGame.States {
 			MLight = new Light(new Vector2f(0, 0), 500, Color.White);
 
 			Lights.Add(new Light(new Vector2f(350, 150), 500, Color.Red));
+			//Lights.AddRange(Penumbrae(new Vector2f(350, 150), 500, Color.White));
 			Lights.Add(new Light(new Vector2f(400, 550), 500, Color.Green));
 			Lights.Add(new Light(new Vector2f(500, 300), 500, Color.Blue));
 			Lights.Add(MLight);
 
 			Wrld = new World();
+		}
+
+		static Light[] Penumbrae(Vector2f Pos, float Range, Color Clr) {
+			Light[] Ls = new Light[3];
+			float Dist = 20;
+			float Ang = 0;
+
+			Ls[0] = new Light(Pos - new Vector2f((float)Math.Cos(0 + Ang) * Dist, (float)Math.Sin(0 + Ang) * Dist), Range, Clr);
+			Ls[1] = new Light(Pos - new Vector2f((float)Math.Cos(120 + Ang) * Dist, (float)Math.Sin(120 + Ang) * Dist), Range, Clr);
+			Ls[2] = new Light(Pos - new Vector2f((float)Math.Cos(240 + Ang) * Dist, (float)Math.Sin(240 + Ang) * Dist), Range, Clr);
+			return Ls;
 		}
 
 		public T AddEntity<T>(T E) where T : Entity {
@@ -106,7 +118,7 @@ namespace TheGame.States {
 
 
 			R.PushGLStates();
-			R.LightBuffer.Clear(new Color(10, 10, 14));
+			R.LightBuffer.Clear(new Color(20, 20, 24));
 			GL.BlendEquation(BlendEquationMode.Max);
 			for (int i = 0; i < Lights.Count; i++)
 				if (Lights[i].Position.InRange(View.Center, (View.Size.X.Pow() + View.Size.Y.Pow()).Sqrt())) {
@@ -114,10 +126,15 @@ namespace TheGame.States {
 					R.LightBuffer2.PushGLStates();
 					Lights[i].Render(Wrld, R.LightBuffer2);
 					Lights[i].RenderShadows(Wrld, R.LightBuffer2);
+					Lights[i].RenderSolidLights(Wrld, R.LightBuffer2);
+					R.LightBuffer.SetActive(true);
+					R.LightBuffer.PushGLStates();
+					GL.BlendFunc(BlendingFactorSrc.One, BlendingFactorDest.One);
+					GL.BlendEquation(BlendEquationMode.FuncAdd);
 					R.RenderRTTo(R.LightBuffer2, R.LightBuffer);
+					R.LightBuffer.PopGLStates();
 					R.LightBuffer2.PopGLStates();
 				}
-
 			R.SetActive(true);
 			GL.BlendFunc(BlendingFactorSrc.DstColor, BlendingFactorDest.Zero);
 			GL.BlendEquation(BlendEquationMode.FuncAdd);

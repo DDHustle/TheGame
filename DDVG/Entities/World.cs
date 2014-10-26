@@ -21,13 +21,11 @@ namespace TheGame.Entities {
 	class Tile {
 		public bool Enabled, IsWall;
 		public Texture Tex;
-		public Polymesh SShape;
 
 		public Tile(Texture T, bool Wall) {
 			Enabled = true;
 			Tex = T;
 			IsWall = Wall;
-			SShape = null;
 		}
 
 		static Tile() {
@@ -55,19 +53,31 @@ namespace TheGame.Entities {
 					}
 		}
 
-		public Polymesh GetShadowMesh(int X, int Y, Vector2f Pos, float Rad) {
+		public FloatRect GetAABB(int X, int Y, Vector2f Pos, float Rad) {
+			return new FloatRect(X * TileMgr.TileSize, Y * TileMgr.TileSize, TileMgr.TileSize, TileMgr.TileSize);
+		}
+
+		public Polymesh GetBaseMesh(int X, int Y, Vector2f Pos, float Rad) {
 			if (!IsWall)
 				return null;
 
-			SShape = new Polymesh(new Vector2f[] {
+			Polymesh SShape = new Polymesh(new Vector2f[] {
 					new Vector2f(0, 0),
 					new Vector2f(TileMgr.TileSize, 0),
 					new Vector2f(TileMgr.TileSize, TileMgr.TileSize),
 					new Vector2f(TileMgr.TileSize, TileMgr.TileSize),
 					new Vector2f(0, TileMgr.TileSize),
 					new Vector2f(0, 0),
-				});
-			SShape.Add(new Vector2f(X * TileMgr.TileSize, Y * TileMgr.TileSize));
+				}, Color.White);
+			return SShape.Add(new Vector2f(X * TileMgr.TileSize, Y * TileMgr.TileSize));
+		}
+
+		public Polymesh GetShadowMesh(int X, int Y, Vector2f Pos, float Rad) {
+			if (!IsWall)
+				return null;
+
+			Polymesh SShape = GetBaseMesh(X, Y, Pos, Rad);
+			SShape.PolyColor = Color.Black;
 
 			Vector2f[] Pts2 = new Vector2f[SShape.Length];
 			for (int i = 0; i < Pts2.Length; i++) {
@@ -112,6 +122,17 @@ namespace TheGame.Entities {
 				}
 
 			return Shapes.ToArray();
+		}
+
+		public FloatRect[] GetSolidAABBs(Vector2f Pos, float Rad) {
+			List<FloatRect> AABBs = new List<FloatRect>();
+
+			for (int x = 0; x < W; x++)
+				for (int y = 0; y < H; y++)
+					if (Tiles[x, y].IsWall)
+						AABBs.Add(Tiles[x, y].GetAABB(x, y, Pos, Rad));
+
+			return AABBs.ToArray();
 		}
 
 		public void Render(Renderer R) {

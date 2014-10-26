@@ -37,10 +37,24 @@ namespace TheGame.Entities {
 			R.Draw(LSprite);
 		}
 
-		public void RenderShadows(World W, RenderTarget R) {
+		public void RenderShadows(World W, RenderTexture R) {
 			Polymesh[] ShadowShapes = W.GetShadowMesh(Position, Range);
 			for (int i = 0; i < ShadowShapes.Length; i++)
 				ShadowShapes[i].Draw(R);
+		}
+
+		// TODO: Render lights inside solid blocks
+		public void RenderSolidLights(World W, RenderTexture R) {
+			FloatRect[] AABBs = W.GetSolidAABBs(Position, Range);
+			R.SetActive(true);
+			GL.Enable(EnableCap.ScissorTest);
+			for (int i = 0; i < AABBs.Length; i++) {
+				Vector2i Pos = R.MapCoordsToPixel(AABBs[i].GetPosition());
+				GL.Scissor((int)Pos.X, (int)R.Size.Y - (int)Pos.Y - (int)AABBs[i].Height - 1,
+					(int)AABBs[i].Width + 1, (int)AABBs[i].Height + 1);
+				Render(W, R);
+			}
+			GL.Disable(EnableCap.ScissorTest);
 		}
 	}
 }
