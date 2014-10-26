@@ -17,7 +17,7 @@ namespace TheGame.GUI {
 			Background = new RectangleShape();
 			Background.Position = new Vector2f();
 			Background.Size = new Vector2f(B.Renderer.Size.X, 300);
-			Background.FillColor = new Color(12, 12, 12, 50);
+			Background.FillColor = new Color(12, 12, 12, 100);
 
 		}
 
