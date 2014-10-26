@@ -46,13 +46,14 @@ namespace TheGame.States {
 		}
 
 		public override void Deactivate(State NewState) {
-			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 100);
+			// Temporarily disabled both
+			//AudioMgr.DoOperation(AudioMgr.MusicOp.FadeOut, SoundTrack, 100);
 			base.Deactivate(NewState);
 		}
 
 		public override void Activate(State OldState) {
-			SoundTrack.Loop = true;
-			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeIn, SoundTrack, 100);
+			/*SoundTrack.Loop = true;
+			AudioMgr.DoOperation(AudioMgr.MusicOp.FadeIn, SoundTrack, 100);*/
 			base.Activate(OldState);
 		}
 

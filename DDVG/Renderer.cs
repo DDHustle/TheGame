@@ -22,14 +22,20 @@ namespace TheGame {
 		public sbyte FrameByte;
 
 		public RenderTexture LightBuffer;
+		public RenderTexture LightBuffer2;
 		internal Sprite BufferSprite;
 
-		public Renderer(uint W, uint H)
-			: base(new VideoMode(W, H), "The Game", Styles.Close) {
+		public Renderer(uint W, uint H, ContextSettings Settings)
+			: base(new VideoMode(W, H), "The Game", Styles.Close, Settings) {
 			GameTime = new Stopwatch();
 			GameTime.Start();
 
+			Console.WriteLine("OpenGL {2}.{3}, Depth: {0}, Stencil: {1}, AA: {4}",
+				Settings.DepthBits, Settings.StencilBits, Settings.MajorVersion, Settings.MinorVersion, Settings.AntialiasingLevel);
+
+
 			LightBuffer = new RenderTexture(Size.X, Size.Y);
+			LightBuffer2 = new RenderTexture(Size.X, Size.Y);
 			BufferSprite = new Sprite(LightBuffer.Texture);
 
 			Closed += (S, E) => Close();
@@ -49,9 +55,9 @@ namespace TheGame {
 			Ctx.LoadAll();
 			Console.WriteLine("OK");
 
-			/*Console.WriteLine("Setting up OpenGL");
+			Console.WriteLine("Setting up OpenGL");
 			GL.Enable(EnableCap.Blend);
-			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);*/
+			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 		}
 
 		public void SwitchState(State NewState) {
@@ -69,13 +75,17 @@ namespace TheGame {
 		}
 
 		public void RenderRT(RenderTexture RT, bool SuppressDisplay = false) {
+			RenderRTTo(RT, this, SuppressDisplay);
+		}
+
+		public void RenderRTTo(RenderTexture RT, RenderTarget Target, bool SuppressDisplay = false) {
 			if (!SuppressDisplay)
 				RT.Display();
 			View V = GetView();
-			SetView(DefaultView);
+			Target.SetView(DefaultView);
 			BufferSprite.Texture = RT.Texture;
-			base.Draw(BufferSprite);
-			SetView(V);
+			Target.Draw(BufferSprite);
+			Target.SetView(V);
 		}
 
 		public void Render() {
@@ -90,7 +100,7 @@ namespace TheGame {
 		}
 
 		public new void Clear(Color Clr) {
-			GL.Clear(ClearBufferMask.StencilBufferBit);
+			ClearStencil();
 			base.Clear(Clr);
 		}
 
@@ -103,6 +113,32 @@ namespace TheGame {
 			S.Texture = Orig;
 			Draw(S);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+		}
+
+		public void ClearStencil() {
+			GL.Clear(ClearBufferMask.StencilBufferBit);
+		}
+
+		public void StencilMask(Action Mask, Action Inside, Action Outside) {
+			GL.Enable(EnableCap.StencilTest);
+			GL.ColorMask(false, false, false, false);
+			GL.DepthMask(false);
+			GL.StencilFunc(StencilFunction.Never, 1, 0xFF);
+			GL.StencilOp(StencilOp.Replace, StencilOp.Keep, StencilOp.Keep);
+			GL.StencilMask(0xFF);
+			Mask();
+			GL.ColorMask(true, true, true, true);
+			GL.DepthMask(true);
+			GL.StencilMask(0x00);
+			if (Outside != null) {
+				GL.StencilFunc(StencilFunction.Equal, 0, 0xFF);
+				Outside();
+			}
+			if (Inside != null) {
+				GL.StencilFunc(StencilFunction.Equal, 1, 0xFF);
+				Inside();
+			}
+			GL.Disable(EnableCap.StencilTest);
 		}
 	}
 }

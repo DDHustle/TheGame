@@ -35,11 +35,11 @@ namespace TheGame.States {
 			Ents = new List<Entity>();
 			Lights = new List<Light>();
 
-			MLight = new Light(new Vector2f(0, 0), 200, Color.Yellow);
+			MLight = new Light(new Vector2f(0, 0), 1000, Color.Green);
 
-			/*Lights.Add(new Light(new Vector2f(250, 250), 500, Color.Red));
-			Lights.Add(new Light(new Vector2f(180, 350), 500, Color.Green));
-			Lights.Add(new Light(new Vector2f(320, 350), 500, Color.Blue));*/
+			/*Lights.Add(new Light(new Vector2f(250, 300), 1000, Color.Red));
+			Lights.Add(new Light(new Vector2f(180, 400), 1000, Color.Green));
+			Lights.Add(new Light(new Vector2f(320, 400), 1000, Color.Blue));*/
 			Lights.Add(MLight);
 
 			Wrld = new World();
@@ -95,21 +95,29 @@ namespace TheGame.States {
 
 		public override void Render(Renderer R) {
 			R.Clear(ClearColor);
-			Wrld.Render(R, View);
+			R.LightBuffer.SetView(View);
+			R.LightBuffer2.SetView(View);
+			Wrld.Render(R);
 
 			for (int i = 0; i < Ents.Count; i++)
 				Ents[i].Render(R);
 
-			R.PushGLStates();
-			R.LightBuffer.Clear(new Color(12, 12, 15));
-			R.LightBuffer.SetView(View);
-			GL.BlendEquation(BlendEquationMode.Max);
 
+			R.PushGLStates();
+			R.LightBuffer.Clear(new Color(125, 125, 125));
+			GL.BlendEquation(BlendEquationMode.Max);
 			for (int i = 0; i < Lights.Count; i++)
-				Lights[i].Render(Wrld, View, R);
+				if (Lights[i].Position.InRange(View.Center, (View.Size.X.Pow() + View.Size.Y.Pow()).Sqrt())) {
+					R.LightBuffer2.Clear(Color.Black);
+					R.LightBuffer2.PushGLStates();
+					Lights[i].Render(Wrld, R.LightBuffer2);
+					Lights[i].RenderShadows(Wrld, R.LightBuffer2);
+					R.RenderRTTo(R.LightBuffer2, R.LightBuffer);
+					R.LightBuffer2.PopGLStates();
+				}
 
 			R.SetActive(true);
-			GL.BlendFunc(BlendingFactorSrc.Zero, BlendingFactorDest.SrcColor);
+			GL.BlendFunc(BlendingFactorSrc.DstColor, BlendingFactorDest.Zero);
 			GL.BlendEquation(BlendEquationMode.FuncAdd);
 			R.RenderRT(R.LightBuffer);
 			R.PopGLStates();

@@ -36,7 +36,8 @@ namespace TheGame.Entities {
 
 		internal static Sprite T;
 
-		public static void Draw(Renderer R, Tile[,] Tiles, int W, int H, View V) {
+		public static void Draw(Renderer R, Tile[,] Tiles, int W, int H) {
+			View V = R.GetView();
 			Vector2f LeftViewCorner = (V.Center - (new Vector2f(V.Viewport.Width * V.Size.X, V.Viewport.Height * V.Size.Y) / 2));
 			LeftViewCorner /= TileMgr.TileSize;
 
@@ -54,32 +55,27 @@ namespace TheGame.Entities {
 					}
 		}
 
-		public Shape GetShadowMesh(int X, int Y, Vector2f Pos, float Rad) {
+		public Polymesh GetShadowMesh(int X, int Y, Vector2f Pos, float Rad) {
 			if (!IsWall)
 				return null;
 
-			if (SShape == null) {
-				SShape = new Polymesh(new Vector2f[] {
+			SShape = new Polymesh(new Vector2f[] {
 					new Vector2f(0, 0),
 					new Vector2f(TileMgr.TileSize, 0),
 					new Vector2f(TileMgr.TileSize, TileMgr.TileSize),
+					new Vector2f(TileMgr.TileSize, TileMgr.TileSize),
 					new Vector2f(0, TileMgr.TileSize),
+					new Vector2f(0, 0),
 				});
-				SShape.Add(new Vector2f(X * TileMgr.TileSize, Y * TileMgr.TileSize));
-			}
+			SShape.Add(new Vector2f(X * TileMgr.TileSize, Y * TileMgr.TileSize));
 
 			Vector2f[] Pts2 = new Vector2f[SShape.Length];
-			for (int i = 0; i < Pts2.Length; i++){
-				float Ang = Pos.Angle(SShape[i]);
+			for (int i = 0; i < Pts2.Length; i++) {
+				float Ang = SShape[i].Angle(Pos);
 				Pts2[i] = new Vector2f(SShape[i].X + Rad * (float)Math.Cos(Ang), SShape[i].Y + Rad * (float)Math.Sin(Ang));
 			}
 
-			Shape SS = new Polymesh(Pts2).ToShape();
-			//Shape SS = SShape.ToShape();
-			SS.FillColor = Color.Black;
-			SS.OutlineThickness = 2;
-			SS.OutlineColor = Color.White;
-			return SS;
+			return SShape.Merge(Pts2);
 		}
 	}
 
@@ -99,16 +95,18 @@ namespace TheGame.Entities {
 				for (int y = 0; y < H; y++)
 					Tiles[x, y] = Bottom;
 
-			Tiles[5, 5] = Wall;
+			Tiles[5, 3] = Tiles[5, 4] = Tiles[5, 5] = Tiles[5, 6] = Tiles[5, 7] = Wall;
+			Tiles[6, 3] = Tiles[7, 3] = Tiles[8, 3] = Wall;
+			Tiles[6, 7] = Tiles[7, 7] = Tiles[8, 7] = Wall;
 		}
 
-		public Shape[] GetShadowMesh(Vector2f Pos, float Rad) {
+		public Polymesh[] GetShadowMesh(Vector2f Pos, float Rad) {
 			// TODO: Clip properly
-			List<Shape> Shapes = new List<Shape>();
+			List<Polymesh> Shapes = new List<Polymesh>();
 
 			for (int x = 0; x < W; x++)
 				for (int y = 0; y < H; y++) {
-					Shape S = Tiles[x, y].GetShadowMesh(x, y, Pos, Rad);
+					Polymesh S = Tiles[x, y].GetShadowMesh(x, y, Pos, Rad);
 					if (S != null)
 						Shapes.Add(S);
 				}
@@ -116,8 +114,8 @@ namespace TheGame.Entities {
 			return Shapes.ToArray();
 		}
 
-		public void Render(Renderer R, View V) {
-			Tile.Draw(R, Tiles, W, H, V);
+		public void Render(Renderer R) {
+			Tile.Draw(R, Tiles, W, H);
 		}
 	}
 }

@@ -110,6 +110,16 @@ namespace TheGame {
 		}
 
 		public static void DoOperation(MusicOp O, Music M, float Amount) {
+			// TODO: Fix bug
+			if (O == MusicOp.FadeIn) {
+				M.Volume = 100;
+				M.Play();
+			} else if (O == MusicOp.FadeOut) {
+				M.Volume = 0;
+				M.Stop();
+			}
+			return;
+
 			if (O == MusicOp.FadeIn)
 				M.Volume = 1;
 			OpList.Add(new Tuple<MusicOp, float, Music>(O, Amount, M));

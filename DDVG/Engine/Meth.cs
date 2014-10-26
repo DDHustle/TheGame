@@ -33,7 +33,12 @@ namespace TheGame {
 		public static float Angle(this Vector2f A, Vector2f B) {
 			float xD = A.X - B.X;
 			float yD = A.Y - B.Y;
-			return (float)(Math.Atan2(yD, xD) /** 180.0 / Math.PI*/);
+			return (float)(Math.Atan2(yD, xD));
+		}
+
+		public static Vector2f Normal(this Vector2f A, Vector2f B) {
+			Vector2f Delta = A - B;
+			return new Vector2f(-Delta.Y, Delta.X);
 		}
 	}
 }
