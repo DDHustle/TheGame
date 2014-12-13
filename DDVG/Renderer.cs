@@ -16,7 +16,7 @@ using SFML.Window;
 using TheGame.States;
 
 namespace TheGame {
-	class Renderer : RenderWindow {
+	public class Renderer : RenderWindow {
 		public State ActiveState;
 		public Stopwatch GameTime;
 		public sbyte FrameByte;

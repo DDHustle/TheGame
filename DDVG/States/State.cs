@@ -9,7 +9,7 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace TheGame.States {
-	class State {
+	public class State {
 		internal Renderer RendererBase;
 		internal GUIBase UI;
 

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace TheGame 
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-using SFML.Graphics;
-using SFML.Window;
+    using SFML.Graphics;
+    using SFML.Window;
 
-namespace TheGame {
-	static class Extensions {
+    static class Extensions 
+    {
 		public static Vector2f GetPosition(this FloatRect R) {
 			return new Vector2f(R.Left, R.Top);
 		}

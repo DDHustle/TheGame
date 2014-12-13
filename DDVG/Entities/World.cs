@@ -18,7 +18,7 @@ using TheGame.GUI;
 using TheGame.Entities;
 
 namespace TheGame.Entities {
-	class Tile {
+	public class Tile {
 		public bool Enabled, IsWall;
 		public Texture Tex;
 
@@ -89,7 +89,7 @@ namespace TheGame.Entities {
 		}
 	}
 
-	class World {
+	public class World {
 		public Tile[,] Tiles;
 		int W, H;
 

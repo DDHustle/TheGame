@@ -8,7 +8,7 @@ using SFML.Graphics;
 using SFML.Window;
 
 namespace TheGame {
-	class Polymesh {
+	public class Polymesh {
 		public static Polymesh Empty;
 
 
