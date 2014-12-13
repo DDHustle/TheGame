@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="TheGame.Components.BaseComponent" Collapsed="true">
-    <Position X="3.5" Y="7.5" Width="1.5" />
+    <Position X="0.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Components\BaseComponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Components.RenderComponent" Collapsed="true">
-    <Position X="3.5" Y="8.75" Width="1.5" />
+    <Position X="0.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Components\RenderComponent.cs</FileName>
@@ -36,28 +36,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GraphicsMgr" Collapsed="true">
-    <Position X="10.25" Y="1.5" Width="1.5" />
+    <Position X="12" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAACAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engine\Managers\GraphicsMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.TileMgr" Collapsed="true">
-    <Position X="12" Y="3.5" Width="1.5" />
+    <Position X="13.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAEAAAAAAAAAAAAAAAIQAAAAAAAQAAA=</HashCode>
       <FileName>Engine\Managers\TileMgr.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Meth" Collapsed="true">
-    <Position X="15.5" Y="1.5" Width="1.5" />
+    <Position X="17.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAAAAAAAAAAAAAAAAAACASIAABAAEAAAAAAAAA=</HashCode>
       <FileName>Engine\Meth.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Polymesh" Collapsed="true">
-    <Position X="17.25" Y="1.5" Width="1.5" />
+    <Position X="10.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAgAAAAAAggAACAIBAABAAAAEAQAAACAAAAAAAAA=</HashCode>
       <FileName>Engine\Polymesh.cs</FileName>
@@ -78,24 +78,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GameObject" Collapsed="true">
-    <Position X="13.75" Y="1.5" Width="1.5" />
+    <Position X="10.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAQAAAAAAAAAAQAAIIAAAAAAAAAAABAACBIACABAEAI=</HashCode>
+      <HashCode>AAQAAAAAAgAAAQAAIAAAAAAAAAAAABAACBIACAAAEAI=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="TheGame.Main" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAAAAAAAAAAgAAAAJAAAAAAAAAAAAAAAgAABAAAA=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="TheGame.Program" Collapsed="true">
-    <Position X="10.25" Y="2.5" Width="1.5" />
+    <Position X="12" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TheGame.Main" Collapsed="true">
-    <Position X="12" Y="2.5" Width="1.5" />
+  <Class Name="TheGame.StartScene" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAgAAAAJAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
-      <FileName>Main.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StartScene.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Engine.Scene" Collapsed="true">
@@ -120,49 +127,49 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Entities.Light" Collapsed="true">
-    <Position X="12" Y="1.5" Width="1.5" />
+    <Position X="13.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAICACAAgAAAAAAAAAAAAAEAAABAAAAAAAAA=</HashCode>
       <FileName>Entities\Light.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Entities.Tile" Collapsed="true">
-    <Position X="10.25" Y="3.5" Width="1.5" />
+    <Position X="12" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgoAAQAAAAAAAAAAAgEAAQAAAAAAEAAA=</HashCode>
       <FileName>Entities\Tile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.Entities.World" Collapsed="true">
-    <Position X="13.75" Y="3.5" Width="1.5" />
+    <Position X="15.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAIAQBAAAEAIAAA=</HashCode>
       <FileName>Entities\World.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GUI.Button" Collapsed="true">
-    <Position X="0.75" Y="5.75" Width="1.5" />
+    <Position X="3" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAgAAABAAAAACAAAEAAAhAABAAAYAA=</HashCode>
       <FileName>GUI\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GUI.ButtonOutlined" Collapsed="true">
-    <Position X="0.75" Y="7.25" Width="1.5" />
+    <Position X="3" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GUI\ButtonOutlined.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GUI.GConsole" Collapsed="true">
-    <Position X="3" Y="5.75" Width="1.5" />
+    <Position X="5.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAgAAAAAAA=</HashCode>
       <FileName>GUI\GConsole.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TheGame.GUI.GUIBase" Collapsed="true">
-    <Position X="5.25" Y="5.75" Width="1.5" />
+    <Position X="0.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAQAABAEAAAAABACAAAAAEAA=</HashCode>
       <FileName>GUI\GUIBase.cs</FileName>

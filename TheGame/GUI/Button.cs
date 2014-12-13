@@ -57,7 +57,7 @@ namespace TheGame.GUI {
 			TextObj.Style = Text.Styles.Bold;
 			TextObj.CharacterSize = 30;
 			TextObj.DisplayedString = ButtonText;
-			TextObj.Color = Color.Red;
+            TextObj.Color = Color.Black;
 
 			Rect = new RectangleShape();
 			Rect.OutlineColor = Color.Black;

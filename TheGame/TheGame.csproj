@@ -96,7 +96,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="data\fonts\framd.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

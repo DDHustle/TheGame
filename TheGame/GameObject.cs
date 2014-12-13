@@ -30,9 +30,6 @@ namespace TheGame {
             _window.SetVisible(true);
             _window.SetVerticalSyncEnabled(true);
 
-            //Console.WriteLine("OpenGL {2}.{3}, Depth: {0}, Stencil: {1}, AA: {4}", Settings.DepthBits, Settings.StencilBits, Settings.MajorVersion, Settings.MinorVersion, Settings.AntialiasingLevel);
-
-
             _window.LightBuffer = new RenderTexture(_window.Size.X, _window.Size.Y);
             _window.LightBuffer2 = new RenderTexture(_window.Size.X, _window.Size.Y);
             _window.BufferSprite = new Sprite(_window.LightBuffer.Texture);

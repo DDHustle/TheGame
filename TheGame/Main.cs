@@ -1,5 +1,4 @@
-﻿namespace TheGame 
-{
+﻿namespace TheGame {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -14,37 +13,36 @@
     using SFML.Graphics;
     using SFML.Window;
     using TheGame.States;
-    
+
     /// <summary>
     /// 
     /// </summary>
-	public class Main : RenderWindow
-    {
+    public class Main : RenderWindow {
         /// <summary>
         /// 
         /// </summary>
-		public State ActiveState;
+        public State ActiveState;
 
         /// <summary>
         /// 
         /// </summary>
-		public Stopwatch GameTime;
+        public Stopwatch GameTime;
 
-		/// <summary>
-		/// 
-		/// </summary>
+        /// <summary>
+        /// 
+        /// </summary>
         public sbyte FrameByte;
 
         /// <summary>
         /// 
         /// </summary>
-		public RenderTexture LightBuffer;
-		
+        public RenderTexture LightBuffer;
+
         /// <summary>
         /// 
         /// </summary>
         public RenderTexture LightBuffer2;
-		
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,13 +53,14 @@
         /// </summary>
         /// <param name="W"></param>
         /// <param name="H"></param>
-		public Main(uint W, uint H)
-			: base(new VideoMode(W, H), "The Game", Styles.Close) 
-        {
+        public Main(uint W, uint H)
+            : base(new VideoMode(W, H), "The Game", Styles.Close) {
             this.GameTime = new Stopwatch();
             this.GameTime.Start();
 
-		}
+            Console.WriteLine("OpenGL {2}.{3}, Depth: {0}, Stencil: {1}, AA: {4}", Settings.DepthBits, Settings.StencilBits, Settings.MajorVersion, Settings.MinorVersion, Settings.AntialiasingLevel);
+
+        }
 
         /// <summary>
         /// 
@@ -78,5 +77,5 @@
         public void ClearStencil() {
             GL.Clear(ClearBufferMask.StencilBufferBit);
         }
-	}
+    }
 }
