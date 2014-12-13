@@ -1,35 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿namespace TheGame {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using SFML.Graphics;
+    using SFML.Window;
+    using TheGame.States;
 
-using TheGame.States;
 
-using SFML.Graphics;
-using SFML.Window;
+    class Program {
+        static void Main(string[] args) {
 
-namespace TheGame {
-	class Program {
-		static void Main(string[] args) {
-			Console.Title = "The Game Console";
+            var game = new GameObject();
 
-			Renderer R = new Renderer(800, 600);
-			Stopwatch SWatch = new Stopwatch();
-			SWatch.Start();
+            game.Run();
+        }
 
-			R.SwitchState(new MenuState(R));
-			R.Init();
-
-			while (R.IsOpen()) {
-				R.DispatchEvents();
-				while (SWatch.ElapsedMilliseconds < 16)
-					;
-				R.Update((float)SWatch.ElapsedMilliseconds / 1000f);
-				SWatch.Restart();
-				R.Render();
-			}
-
-			Console.WriteLine("Quitting...");
-			Environment.Exit(0); // Required
-		}
-	}
+    }
 }

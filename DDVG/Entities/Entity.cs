@@ -31,7 +31,7 @@
         public virtual void Update(float T) {
         }
 
-        public virtual void Render(Renderer R) {
+        public virtual void Render(Main R) {
         }
         
         /// <summary>

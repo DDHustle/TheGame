@@ -28,7 +28,7 @@ namespace TheGame.States {
 
 		Light MLight;
 
-		public GameState(Renderer R)
+		public GameState(Main R)
 			: base(R) {
 			ClearColor = new Color(50, 12, 12); // Something redish
 
@@ -107,41 +107,41 @@ namespace TheGame.States {
 			base.Update(T);
 		}
 
-		public override void Render(Renderer R) {
-			R.Clear(ClearColor);
-			R.LightBuffer.SetView(View);
-			R.LightBuffer2.SetView(View);
-			Wrld.Render(R);
+		public override void Render(GameObject renderer) {
+			renderer.Window.Clear(ClearColor);
+            renderer.Window.LightBuffer.SetView(View);
+            renderer.Window.LightBuffer2.SetView(View);
+			Wrld.Render(renderer.Window);
 
-			for (int i = 0; i < Ents.Count; i++)
-				Ents[i].Render(R);
+            for (int i = 0; i < Ents.Count; i++) {
+                Ents[i].Render(renderer.Window);
+            }
 
-
-			R.PushGLStates();
-			R.LightBuffer.Clear(new Color(20, 20, 24));
+            renderer.Window.PushGLStates();
+			renderer.Window.LightBuffer.Clear(new Color(20, 20, 24));
 			GL.BlendEquation(BlendEquationMode.Max);
 			for (int i = 0; i < Lights.Count; i++)
 				if (Lights[i].Position.InRange(View.Center, (View.Size.X.Pow() + View.Size.Y.Pow()).Sqrt())) {
-					R.LightBuffer2.Clear(Color.Black);
-					R.LightBuffer2.PushGLStates();
-					Lights[i].Render(Wrld, R.LightBuffer2);
-					Lights[i].RenderShadows(Wrld, R.LightBuffer2);
-					Lights[i].RenderSolidLights(Wrld, R.LightBuffer2);
-					R.LightBuffer.SetActive(true);
-					R.LightBuffer.PushGLStates();
+                    renderer.Window.LightBuffer2.Clear(Color.Black);
+                    renderer.Window.LightBuffer2.PushGLStates();
+                    Lights[i].Render(Wrld, renderer.Window.LightBuffer2);
+                    Lights[i].RenderShadows(Wrld, renderer.Window.LightBuffer2);
+                    Lights[i].RenderSolidLights(Wrld, renderer.Window.LightBuffer2);
+                    renderer.Window.LightBuffer.SetActive(true);
+                    renderer.Window.LightBuffer.PushGLStates();
 					GL.BlendFunc(BlendingFactorSrc.One, BlendingFactorDest.One);
 					GL.BlendEquation(BlendEquationMode.FuncAdd);
-					R.RenderRTTo(R.LightBuffer2, R.LightBuffer);
-					R.LightBuffer.PopGLStates();
-					R.LightBuffer2.PopGLStates();
+                    renderer.RenderRTTo(renderer.Window.LightBuffer2, renderer.Window.LightBuffer);
+                    renderer.Window.LightBuffer.PopGLStates();
+                    renderer.Window.LightBuffer2.PopGLStates();
 				}
-			R.SetActive(true);
+            renderer.Window.SetActive(true);
 			GL.BlendFunc(BlendingFactorSrc.DstColor, BlendingFactorDest.Zero);
 			GL.BlendEquation(BlendEquationMode.FuncAdd);
-			R.RenderRT(R.LightBuffer);
-			R.PopGLStates();
+            renderer.RenderRT(renderer.Window.LightBuffer);
+            renderer.Window.PopGLStates();
 
-			base.Render(R);
+            base.Render(renderer);
 		}
 	}
 }

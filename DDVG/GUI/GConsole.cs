@@ -29,7 +29,7 @@ namespace TheGame.GUI {
 			}
 		}
 
-		public override void Render(Renderer R) {
+		public override void Render(Main R) {
 			R.Draw(Background);
 			base.Render(R);
 		}

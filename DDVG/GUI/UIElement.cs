@@ -15,7 +15,7 @@ namespace TheGame.GUI {
 
 		UIElement Parent;
 
-		public Renderer Renderer {
+		public Main Renderer {
 			get {
 				return UI.Renderer;
 			}
@@ -130,7 +130,7 @@ namespace TheGame.GUI {
 		}
 
 
-		public virtual void OnRender(Renderer R) {
+		public virtual void OnRender(Main R) {
 			if (!Active)
 				return;
 			PreRender(R);
@@ -138,19 +138,19 @@ namespace TheGame.GUI {
 			PostRender(R);
 		}
 
-		public virtual void PreRender(Renderer R) {
+		public virtual void PreRender(Main R) {
 			for (int i = Elements.Count - 1; i >= 0; i--)
 				if (ElementsFlat[i].Active)
 					ElementsFlat[i].PreRender(R);
 		}
 
-		public virtual void Render(Renderer R) {
+		public virtual void Render(Main R) {
 			for (int i = Elements.Count - 1; i >= 0; i--)
 				if (ElementsFlat[i].Active)
 					ElementsFlat[i].Render(R);
 		}
 
-		public virtual void PostRender(Renderer R) {
+		public virtual void PostRender(Main R) {
 			for (int i = Elements.Count - 1; i >= 0; i--)
 				if (ElementsFlat[i].Active)
 					ElementsFlat[i].PostRender(R);

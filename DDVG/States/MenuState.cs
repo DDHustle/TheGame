@@ -17,8 +17,8 @@ namespace TheGame.States {
 	class MenuState : State {
 		Music SoundTrack;
 
-		public MenuState(Renderer R)
-			: base(R) {
+		public MenuState(GameObject R)
+			: base(R.Window) {
 			SoundTrack = AudioMgr.GetMusic("soundtrack.ogg");
 
 			ButtonOutlined StartButton = new ButtonOutlined(UI, "Start", FontMgr.GetFont("framd.ttf"));
@@ -26,7 +26,7 @@ namespace TheGame.States {
 			StartButton.Size = new Vector2f(95f, 50f);
 			StartButton.MouseClick += (B, X, Y, Down) => {
 				if (!Down)
-					R.SwitchState(new GameState(R));
+					R.SwitchState(new GameState(R.Window));
 			};
 
 			ButtonOutlined OptionsButton = new ButtonOutlined(UI, "Options", FontMgr.GetFont("framd.ttf"));
@@ -41,7 +41,7 @@ namespace TheGame.States {
 			QuitButton.Size = new Vector2f(85f, 50f);
 			QuitButton.MouseClick += (B, X, Y, Down) => {
 				if (!Down)
-					R.Close();
+					R.Window.Close();
 			};
 		}
 
@@ -57,8 +57,8 @@ namespace TheGame.States {
 			base.Activate(OldState);
 		}
 
-		public override void Render(Renderer R) {
-			R.Clear(Color.White);
+		public override void Render(GameObject R) {
+			R.Window.Clear(Color.White);
 			base.Render(R);
 		}
 	}

@@ -57,7 +57,7 @@ namespace TheGame.GUI {
 			TextObj.Style = Text.Styles.Bold;
 			TextObj.CharacterSize = 30;
 			TextObj.DisplayedString = ButtonText;
-			TextObj.Color = Color.Black;
+			TextObj.Color = Color.Red;
 
 			Rect = new RectangleShape();
 			Rect.OutlineColor = Color.Black;
@@ -72,7 +72,7 @@ namespace TheGame.GUI {
 			base.OnMouseClick(B, X, Y, Down);
 		}
 
-		public override void Render(Renderer R) {
+		public override void Render(Main R) {
 			R.Draw(Rect);
 			R.Draw(TextObj);
 			base.Render(R);

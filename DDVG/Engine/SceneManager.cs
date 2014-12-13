@@ -1,4 +1,5 @@
-﻿namespace TheGame.Engine.Managers {
+﻿namespace TheGame.Engine
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -9,9 +10,41 @@
     /// <summary>
     /// 
     /// </summary>
-    public class Scene {
+    public class SceneManager 
+    {
+        private static SceneManager instance = null;
+        private Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
         private Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
         private static int nextEntityID = 0;
+
+        public Scene CurrentScene = null;
+
+        public static SceneManager Instance {
+            get {
+                if (instance == null) {
+                    instance = new SceneManager();
+                }
+                return instance;
+            }
+        }
+
+        public void AddScene(Scene s) {
+            _scenes.Add(s.Name, s);
+
+            s.Initialize();
+        }
+
+        public void StartScene(string name) {
+            CurrentScene = _scenes[name];
+            CurrentScene.Reset();
+            CurrentScene.Run();
+        }
+
+        public void GotoScene(string name) {
+            CurrentScene = _scenes[name];
+            CurrentScene.Run();
+        }
+
 
         /// <summary>
         /// Returns true if the entity or any components handled the message
@@ -35,7 +68,7 @@
         /// </summary>
         /// <returns></returns>
         public Entity CreateEntity() {
-            Entity newEntity = new Entity(Scene.nextEntityID++);
+            Entity newEntity = new Entity(SceneManager.nextEntityID++);
             entities.Add(newEntity.UniqueID, newEntity);
 
             return newEntity;

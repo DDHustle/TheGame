@@ -9,7 +9,7 @@ using SFML.Graphics;
 
 namespace TheGame.GUI {
 	class GUIBase : UIElement {
-		public new Renderer Renderer;
+		public new Main Renderer;
 
 		internal UIElement InFocus;
 		public override UIElement FocusedElement {
@@ -41,7 +41,7 @@ namespace TheGame.GUI {
 
 		GConsole Con;
 
-		public GUIBase(Renderer R)
+		public GUIBase(Main R)
 			: base(null) {
 			Renderer = R;
 			Active = true;

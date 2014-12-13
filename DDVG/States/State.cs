@@ -10,12 +10,12 @@ using SFML.Window;
 
 namespace TheGame.States {
 	public class State {
-		internal Renderer RendererBase;
+		internal Main RendererBase;
 		internal GUIBase UI;
 
 		public View View;
 
-		public State(Renderer R) {
+		public State(Main R) {
 			RendererBase = R;
 			UI = new GUIBase(R);
 			View = new View(R.GetView());
@@ -47,21 +47,21 @@ namespace TheGame.States {
 			UI.Update(T);
 		}
 
-		public virtual void OnRender(Renderer R) {
+		public virtual void OnRender(GameObject R) {
 			PreRender(R);
 			Render(R);
 			PostRender(R);
 		}
 
-		public virtual void PreRender(Renderer R) {
-			R.SetView(View);
+		public virtual void PreRender(GameObject R) {
+			R.Window.SetView(View);
 		}
 
-		public virtual void Render(Renderer R) {
-			UI.OnRender(R);
+		public virtual void Render(GameObject R) {
+			UI.OnRender(R.Window);
 		}
 
-		public virtual void PostRender(Renderer R) {
+		public virtual void PostRender(GameObject R) {
 
 		}
 	}
