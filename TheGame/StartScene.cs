@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace TheGame {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
-namespace TheGame {
-    class StartScene {
+    /// <summary>
+    /// 
+    /// </summary>
+    public class StartScene {
     }
 }

@@ -2,18 +2,20 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using SFML.Graphics;
-    using SFML.Window;
-    using TheGame.States;
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     class Program {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args) {
-
             var game = new GameObject();
-
             game.Run();
         }
 
     }
+
 }

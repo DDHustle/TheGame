@@ -1,30 +1,41 @@
-﻿using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL4;
-using OpenTK.Platform;
-using SFML.Graphics;
-using SFML.Window;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheGame.Engine;
-using TheGame.States;
+﻿namespace TheGame {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-namespace TheGame {
+    using OpenTK.Graphics;
+    using OpenTK.Graphics.OpenGL4;
+    using OpenTK.Platform;
+    using SFML.Graphics;
+    using SFML.Window;
+    using TheGame.Engine;
+    using TheGame.States;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class GameObject {
+        /// <summary>
+        /// 
+        /// </summary>
         private Main _window;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Main Window {
-
             get {
                 return this._window;
             }
         }
 
-        public GameObject() 
-        {
+        /// <summary>
+        /// 
+        /// </summary>
+        public GameObject() {
             _window = new Main(800, 600);
 
             _window.SetVisible(true);
@@ -89,6 +100,7 @@ namespace TheGame {
             if (!SuppressDisplay) {
                 RT.Display();
             }
+
             View view = _window.GetView();
             Target.SetView(_window.DefaultView);
             _window.BufferSprite.Texture = RT.Texture;
@@ -135,6 +147,9 @@ namespace TheGame {
             _window.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void Initialize() {
             Console.Write("Initializing OpenTK context ... ");
             IWindowInfo Inf = Utilities.CreateWindowsWindowInfo(this._window.SystemHandle);
@@ -142,34 +157,34 @@ namespace TheGame {
             Ctx.MakeCurrent(Inf);
             Ctx.LoadAll();
             Console.WriteLine("OK");
-
             Console.WriteLine("Setting up OpenGL");
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Run() {
-            
             Console.Title = "The Game Console";
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
+            _window.GameTime.Start();
 
             this.Initialize();
-
             this.SwitchState(new MenuState(this));
-            
 
             while (_window.IsOpen()) {
                 this._window.DispatchEvents();
-                while (stopWatch.ElapsedMilliseconds < 16)
+                while (_window.GameTime.ElapsedMilliseconds < 16)
                     ;
-                this.Update((float)stopWatch.ElapsedMilliseconds / 1000f);
-                stopWatch.Restart();
+                this.Update((float)_window.GameTime.ElapsedMilliseconds / 1000f);
+                _window.GameTime.Restart();
                 this.Render();
             }
 
             Console.WriteLine("Quitting...");
             Environment.Exit(0); // Required
         }
+
     }
+
 }
