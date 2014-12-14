@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DDVG.Components.BaseComponent" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\BaseComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Components.RenderComponent" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\RenderComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Extensions" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQACQAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.AudioMgr" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAEAAEAABAAAAAAQAgAAAAACBAADBAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Managers\AudioMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.FontMgr" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAAAAAAACAAAAAAAAAAAgAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Managers\FontMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GraphicsMgr" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Managers\GraphicsMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.TileMgr" Collapsed="true">
+    <Position X="13.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAEAAAAAAAAAAAAAAAIQAAAAAAAQAAA=</HashCode>
+      <FileName>Engine\Managers\TileMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Meth" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAACASIAABAAEAAAAAAAAA=</HashCode>
+      <FileName>Engine\Meth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Polymesh" Collapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgAAAAAAggAACAIBAABAAAAEAQAAACAAAAAAAAA=</HashCode>
+      <FileName>Engine\Polymesh.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Settings" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Console" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAIAAAAAIAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Engine\Terminal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GameObject" Collapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAAQAAIAAAAAAAAAAAABAACBIACAAAEAI=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Main" Collapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAAAAAAAAAAAAgAAAAJAAAAAAAAAAAAAAAgAABAAAA=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Program" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.StartScene" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StartScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Engine.Scene" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAACAIAAABwAAAAAAAAQACAAIAACCAAAUABCAIAI=</HashCode>
+      <FileName>Engine\Scene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Engine.SceneManager" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAACAIAAAAAAhQASAAQAAAEAAAAAA=</HashCode>
+      <FileName>Engine\SceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Entities.Entity" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAIAAAAACSAIAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Entities\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Entities.Light" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAICACAAgAAAAAAAAAAAAAEAAABAAAAAAAAA=</HashCode>
+      <FileName>Entities\Light.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Entities.Tile" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgoAAQAAAAAAAAAAAgEAAQAAAAAAEAAA=</HashCode>
+      <FileName>Entities\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Entities.World" Collapsed="true">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAIAQBAAAEAIAAA=</HashCode>
+      <FileName>Entities\World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GUI.Button" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAgAAABAAAAACAAAEAAAhAABAAAYAA=</HashCode>
+      <FileName>GUI\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GUI.ButtonOutlined" Collapsed="true">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\ButtonOutlined.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GUI.GConsole" Collapsed="true">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBAgAAAAAAA=</HashCode>
+      <FileName>GUI\GConsole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GUI.GUIBase" Collapsed="true">
+    <Position X="0.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAQAABAEAAAAABACAAAAAEAA=</HashCode>
+      <FileName>GUI\GUIBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.GUI.UIElement" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEBAAIAAABgIAgAgBRQEBIBBADAEAkAhCAIQDCEAA=</HashCode>
+      <FileName>GUI\UIElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Messages.BaseMessage" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messages\BaseMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Messages.MessageGetPosition" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messages\MessageGetPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Messages.MessageSetPosition" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messages\MessageSetPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.Messages.PositionMessage" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Messages\PositionMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.States.GameState" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAASAAAAAEQAAAABAgAAAAAAAAgAAJAAJADIAAA=</HashCode>
+      <FileName>States\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.States.MenuState" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAABAAAAAAAAAAAAAEAAAABAAAAAAAAA=</HashCode>
+      <FileName>States\MenuState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DDVG.States.State" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAABAAARAAAAAAAAAAAABAEAAABgAIQCCEAA=</HashCode>
+      <FileName>States\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DDVG.Messages.MessageType" Collapsed="true">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Messages\MessageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
